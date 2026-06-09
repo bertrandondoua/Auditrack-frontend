@@ -139,11 +139,18 @@
       "email_placeholder": "user@example.cm",
       "phone": "Phone",
       "phone_placeholder": "6XX XXX XXX",
-      "position": "Position",
-      "position_placeholder": "Position",
+      "gender": "Gender",
+      "gender_placeholder": "Select",
       "role": "Role",
       "role_placeholder": "Select a role"
     },
+    "roles": {
+      "clerk": "Clerk",
+      "chief_clerk": "Chief clerk",
+      "president": "Section president",
+      "it_manager": "IT manager"
+    },
+    "genders": { "M": "Male", "F": "Female" },
     "status": { "active": "Active", "inactive": "Inactive" }
   },
   "permissions": {

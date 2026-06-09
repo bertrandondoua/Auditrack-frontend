@@ -9,14 +9,10 @@ export interface User {
   image?: string | null;
   first_name: string;
   last_name: string;
-  country: string;
-  address: string;
-  town: string;
   phone_number: string;
   email: string;
   password?: string;
   otp?: string;
-  position: string;
   role?: Role;
   is_staff: boolean;
   is_active: boolean;
