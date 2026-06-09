@@ -21,6 +21,7 @@ import { useGetProgramsQuery } from "@/redux/features/programs/programsApiSlice"
 import { useGetAuthenticatedUserQuery } from "@/redux/features/users/usersApiSlice";
 import type { Locale } from "@/i18n-config";
 import type { Dict } from "@/lib/dictionaries";
+import { embedLabel } from "@/lib/utils";
 
 interface StatCardProps {
   icon: React.ComponentType<{ className?: string }>;
@@ -156,7 +157,10 @@ export default function DashboardMain({ dict }: { dict: Dict }) {
                 >
                   <div>
                     <div className="font-medium text-gray-800">
-                      {r.organization_details ?? orgByUuid.get(r.organization)?.name ?? "—"}
+                      {embedLabel(
+                        r.organization_details,
+                        orgByUuid.get(r.organization)?.name ?? "—",
+                      )}
                     </div>
                     <div className="text-xs text-[#585757]">
                       {r.exercise_year ?? "—"} ·{" "}

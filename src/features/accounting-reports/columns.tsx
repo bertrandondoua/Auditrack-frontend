@@ -4,6 +4,7 @@ import type { ColumnDef } from "@tanstack/react-table";
 
 import { RowActionsMenu } from "@/components/tables/row-actions-menu";
 import type { Dict } from "@/lib/dictionaries";
+import { embedLabel } from "@/lib/utils";
 import type { AccountingReport } from "@/types/accountingReport";
 import type { Organization } from "@/types/organization";
 
@@ -36,9 +37,11 @@ export function buildAccountingReportColumns({
       header: cols.organization,
       cell: ({ row }) => (
         <div className="px-4 py-3 text-gray-900">
-          {row.original.organization_details ??
+          {embedLabel(
+            row.original.organization_details,
             orgByUuid.get(row.original.organization)?.name ??
-            dict.accounting_reports.list.unknown_org}
+              dict.accounting_reports.list.unknown_org,
+          )}
         </div>
       ),
     },
@@ -47,7 +50,7 @@ export function buildAccountingReportColumns({
       accessorKey: "section",
       header: cols.section,
       cell: ({ row }) => (
-        <div className="px-4 py-3 text-gray-700">{row.original.section_details ?? "—"}</div>
+        <div className="px-4 py-3 text-gray-700">{embedLabel(row.original.section_details)}</div>
       ),
     },
     {
