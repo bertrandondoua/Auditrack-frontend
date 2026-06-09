@@ -159,6 +159,17 @@
       "it_manager": "Responsable informatique"
     },
     "genders": { "M": "Masculin", "F": "Féminin" },
+    "reset": {
+      "action": "Réinitialiser le mot de passe",
+      "title": "Réinitialiser le mot de passe",
+      "description": "Définir un nouveau mot de passe pour {name}.",
+      "password": "Nouveau mot de passe",
+      "password_placeholder": "Laisser vide pour générer",
+      "generate_hint": "Laissez le champ vide pour générer un mot de passe temporaire et l'envoyer par e-mail à l'utilisateur.",
+      "submit": "Réinitialiser",
+      "success_set": "Mot de passe réinitialisé avec succès",
+      "success_emailed": "Un mot de passe temporaire a été envoyé par e-mail à l'utilisateur"
+    },
     "status": { "active": "Actif", "inactive": "Inactif" }
   },
   "permissions": {

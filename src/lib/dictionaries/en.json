@@ -151,6 +151,17 @@
       "it_manager": "IT manager"
     },
     "genders": { "M": "Male", "F": "Female" },
+    "reset": {
+      "action": "Reset password",
+      "title": "Reset password",
+      "description": "Set a new password for {name}.",
+      "password": "New password",
+      "password_placeholder": "Leave blank to auto-generate",
+      "generate_hint": "Leave the field blank to generate a temporary password and email it to the user.",
+      "submit": "Reset",
+      "success_set": "Password reset successfully",
+      "success_emailed": "A temporary password has been emailed to the user"
+    },
     "status": { "active": "Active", "inactive": "Inactive" }
   },
   "permissions": {

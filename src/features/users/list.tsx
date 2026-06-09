@@ -17,6 +17,7 @@ import type { User } from "@/types/user";
 import { buildUserColumns } from "./columns";
 import CreateUserDialog from "./create-dialog";
 import EditUserDialog from "./edit-dialog";
+import ResetPasswordDialog from "./reset-password-dialog";
 
 export default function UsersList({ dict }: { dict: Dict }) {
   const { toast } = useToast();
@@ -24,6 +25,7 @@ export default function UsersList({ dict }: { dict: Dict }) {
   const [search] = useDebounce(searchInput, 300);
   const [page, setPage] = useState(1);
   const [editing, setEditing] = useState<User | null>(null);
+  const [resettingTarget, setResettingTarget] = useState<User | null>(null);
   const [deletingTarget, setDeletingTarget] = useState<User | null>(null);
 
   const { data, isLoading, isFetching } = useGetUsersQuery({
@@ -38,6 +40,7 @@ export default function UsersList({ dict }: { dict: Dict }) {
       buildUserColumns({
         dict,
         onEdit: (u) => setEditing(u),
+        onResetPassword: (u) => setResettingTarget(u),
         onDelete: (u) => setDeletingTarget(u),
       }),
     [dict],
@@ -106,6 +109,15 @@ export default function UsersList({ dict }: { dict: Dict }) {
         open={!!editing}
         onOpenChange={(open) => {
           if (!open) setEditing(null);
+        }}
+      />
+
+      <ResetPasswordDialog
+        dict={dict}
+        user={resettingTarget}
+        open={!!resettingTarget}
+        onOpenChange={(open) => {
+          if (!open) setResettingTarget(null);
         }}
       />
 
