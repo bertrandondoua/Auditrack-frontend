@@ -92,9 +92,14 @@ export default function VerificationForm({ dict }: { dict: Dict }) {
   };
 
   const handleResetClick = () => {
+    // Resend the OTP to whichever flow is active (signin or password reset).
     const signinCreds = readJson<{ username: string }>("userCredentials");
-    if (!signinCreds) return;
-    handleResend(signinCreds.username);
+    if (signinCreds) {
+      handleResend(signinCreds.username);
+      return;
+    }
+    const resetCreds = readJson<{ email: string }>("userResseteCredentials");
+    if (resetCreds) handleResend(resetCreds.email);
   };
 
   const renderer = ({

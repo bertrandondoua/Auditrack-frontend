@@ -13,12 +13,8 @@ import type { Dict } from "@/lib/dictionaries";
 import { Button } from "@/components/ui/button";
 import { FormField } from "@/components/ui/form-field";
 import { useToast } from "@/hooks/use-toast";
-import { showErrorToasts, showSuccesToasts } from "@/lib/functions";
-import {
-  useGetAuthConfigQuery,
-  useResetPasswordMutation,
-  useSendOtpMutation,
-} from "@/redux/features/auth/authApiSlice";
+import { showErrorToasts } from "@/lib/functions";
+import { useSendOtpMutation } from "@/redux/features/auth/authApiSlice";
 
 const schema = z.object({
   email: z.string().email(),
@@ -33,13 +29,7 @@ export default function ForgotPasswordForm({ dict }: Readonly<{ dict: Dict }>) {
   const signinHref = `/${lang}/signin`;
   const { toast } = useToast();
   const [visible, setVisible] = useState(false);
-  const [resetPassword, { isLoading: resetting }] = useResetPasswordMutation();
-  const [sendOtp, { isLoading: sendingOtp }] = useSendOtpMutation();
-
-  // Same runtime config as signin — reset requires an OTP when login does.
-  const { data: authConfig } = useGetAuthConfigQuery();
-  const requireOtp = authConfig?.login_require_otp ?? true;
-  const isLoading = resetting || sendingOtp;
+  const [sendOtp, { isLoading }] = useSendOtpMutation();
 
   const {
     register,
@@ -57,23 +47,15 @@ export default function ForgotPasswordForm({ dict }: Readonly<{ dict: Dict }>) {
       window.localStorage.removeItem("userResseteCredentials");
     }
     try {
-      if (requireOtp) {
-        // Request a code, stash the reset payload, hand off to /verification
-        // which completes the reset with the entered OTP.
-        await sendOtp({ email: values.email }).unwrap();
-        window.localStorage.setItem(
-          "userResseteCredentials",
-          JSON.stringify({ email: values.email, password: values.password }),
-        );
-        router.push("verification");
-        return;
-      }
-      const res = await resetPassword({
-        email: values.email,
-        password: values.password,
-      }).unwrap();
-      showSuccesToasts(toast, res, dict.lang, dict.notification.resset_pswd_success, dict);
-      router.push(signinHref);
+      // A password reset ALWAYS requires an OTP, independent of whether login
+      // requires one (auth config). Request a code, stash the reset payload,
+      // and hand off to /verification which completes the reset with the code.
+      await sendOtp({ email: values.email }).unwrap();
+      window.localStorage.setItem(
+        "userResseteCredentials",
+        JSON.stringify({ email: values.email, password: values.password }),
+      );
+      router.push("verification");
     } catch (err) {
       showErrorToasts(err, toast, dict.lang);
     }
