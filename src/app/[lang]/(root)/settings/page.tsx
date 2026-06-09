@@ -1,7 +1,18 @@
 import { Settings as SettingsIcon } from "lucide-react";
+import type { Metadata } from "next";
 
 import type { Locale } from "@/i18n-config";
 import { getDictionary } from "@/lib/dictionaries";
+import { pageMetadata } from "@/lib/seo";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { lang: Locale };
+}): Promise<Metadata> {
+  const dict = await getDictionary(params.lang);
+  return pageMetadata({ lang: params.lang, path: "/settings", title: dict.seo.titles.settings });
+}
 
 export default async function SettingsPage({
   params,

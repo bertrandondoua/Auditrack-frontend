@@ -1,7 +1,18 @@
 import { History } from "lucide-react";
+import type { Metadata } from "next";
 
 import type { Locale } from "@/i18n-config";
 import { getDictionary } from "@/lib/dictionaries";
+import { pageMetadata } from "@/lib/seo";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { lang: Locale };
+}): Promise<Metadata> {
+  const dict = await getDictionary(params.lang);
+  return pageMetadata({ lang: params.lang, path: "/logs", title: dict.seo.titles.logs });
+}
 
 // NOTE: backend exposes no /core/history/ endpoint, and none of the per-model
 // "/history/" actions land either. See BACKEND_MISMATCHES.md §1/§3. Restore
