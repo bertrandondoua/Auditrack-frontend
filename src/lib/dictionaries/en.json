@@ -1,0 +1,790 @@
+{
+  "lang": "en",
+  "notification": {
+    "error": "Error",
+    "success": "Success",
+    "otp_sent": "OTP sent successfully",
+    "otp_verified": "OTP verified successfully",
+    "fill_fields": "Please fill in all fields",
+    "reset_not_same_pwd": "The new password and confirmation password do not match",
+    "reset_same_pwd": "The old and new password must not be the same",
+    "resset_pswd_success": "Password reset successfully",
+    "permission_denied": "You do not have permission to perform this action"
+  },
+  "signin": {
+    "login_Success": "User logged in successfully",
+    "mail": "Enter your email address",
+    "password_msg": "Enter your password",
+    "password": "Password",
+    "welcome": "Welcome back!",
+    "login": "Sign in",
+    "fogot_pass": "Forgot your password?"
+  },
+  "forgot_password": {
+    "title": "Reset security password",
+    "subtitle": "Enter your e-mail address associated with the account",
+    "label": "E-mail",
+    "placeholder": "Enter your email address",
+    "btn1": "Cancel",
+    "btn2": "Continue"
+  },
+  "otp": {
+    "title": "Verification code",
+    "subtitle": "A verification code has been sent to your email. Please check your messages to retrieve it.",
+    "btn": "Continue",
+    "code_validity": "Code validity:",
+    "resend": "Resend"
+  },
+  "new_password": "New password",
+  "routes": {
+    "home": "Home",
+    "control_audit": "Controls and audits",
+    "org": "Organisations",
+    "sanction": "Sanctions",
+    "account": "Accounts",
+    "report": "Reports",
+    "settings": "Settings",
+    "help": "Help and support",
+    "logout": "Logout",
+    "config": "Configurations",
+    "perm": "Permissions",
+    "logs": "Logs"
+  },
+  "header": {
+    "search": "Keyword (Organisations, Audit...)",
+    "searchNotFound": "No results found"
+  },
+  "dashboard": {
+    "hello": {
+      "title": "Welcome",
+      "subtitle": "Welcome to your personalised dashboard."
+    },
+    "stats": {
+      "total_controls": "Total controls",
+      "in_progress": "In progress",
+      "completed": "Completed",
+      "organisations": "Organisations",
+      "accountants": "Accountants",
+      "programs": "Programmes",
+      "reports": "Reports"
+    },
+    "recent_reports_title": "Latest accounting reports",
+    "no_recent_reports": "No recent reports.",
+    "quick_actions_title": "Quick actions",
+    "see_all": "See all",
+    "actions": {
+      "view_controls": "View controls",
+      "view_orgs": "View organisations",
+      "view_config": "Configurations",
+      "view_reports": "View reports"
+    }
+  },
+  "users": {
+    "list": {
+      "title": "Users",
+      "subtitle": "user(s) registered",
+      "create_btn": "New user",
+      "empty": "No users",
+      "search_placeholder": "Search a user",
+      "columns": {
+        "name": "Full name",
+        "email": "Email",
+        "role": "Role",
+        "status": "Status",
+        "actions": "Actions"
+      }
+    },
+    "create": { "title": "New user", "submit": "Create", "success": "User created successfully" },
+    "edit": { "title": "Edit user", "submit": "Save", "success": "User updated successfully" },
+    "fields": {
+      "first_name": "First name",
+      "first_name_placeholder": "First name",
+      "last_name": "Last name",
+      "last_name_placeholder": "Last name",
+      "email": "Email",
+      "email_placeholder": "user@example.cm",
+      "phone": "Phone",
+      "phone_placeholder": "6XX XXX XXX",
+      "position": "Position",
+      "position_placeholder": "Position",
+      "role": "Role",
+      "role_placeholder": "Select a role"
+    },
+    "status": { "active": "Active", "inactive": "Inactive" }
+  },
+  "permissions": {
+    "title": "Permissions",
+    "subtitle": "Role-permission matrix",
+    "deferred_title": "RBAC matrix coming soon",
+    "deferred_body": "The permission matrix editor (check/uncheck per role) lands when the backend exposes /accounts/permissions/. Roles are currently hard-coded in src/configs/constants.ts."
+  },
+  "sanction": {
+    "title": "Sanctions",
+    "subtitle": "Management-fault sanctions",
+    "deferred_body": "The sanctions module is coming in a future iteration. Sanction-type audits currently flow through /control with a dedicated filter."
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Personal preferences and account",
+    "deferred_body": "Personal settings screens (language, password, notifications) land with the settings domain port."
+  },
+  "support": {
+    "title": "Help and support",
+    "subtitle": "Contact the support team",
+    "deferred_body": "The help centre is coming in a future iteration."
+  },
+  "deferred_backend": {
+    "phases": "The backend API (Auditrack-api) does not yet expose the /core/phases/ endpoint. This module will activate as soon as the Phase resource lands server-side. See BACKEND_MISMATCHES.md.",
+    "questionnaires": "The backend API does not yet expose /core/sent-questionnaire/. The sent-questionnaires list will activate as soon as the resource lands server-side.",
+    "logs": "The backend API does not yet expose /core/history/ or per-model history actions. The audit log viewer will activate once an event source is available.",
+    "otp_disabled": "OTP verification is not enabled on this server. Sign in with email and password directly."
+  },
+  "common": {
+    "close": "Close",
+    "cancel": "Cancel",
+    "save": "Save",
+    "loading": "Loading...",
+    "filter": "Filter",
+    "search": "Search",
+    "all": "All",
+    "actions": {
+      "edit": "Edit",
+      "delete": "Delete",
+      "confirm_delete_title": "Confirm deletion",
+      "confirm_delete_description": "This action is irreversible. Continue?",
+      "delete_success": "Deletion successful",
+      "update_success": "Update successful"
+    }
+  },
+  "configuration": {
+    "landing": {
+      "title": "Configurations",
+      "subtitle": "Configure system references and actors.",
+      "accountants": {
+        "title": "Accountants",
+        "description": "Manage public and para-public accountants."
+      },
+      "programs": {
+        "title": "Programmes",
+        "description": "Define annual audit programmes."
+      },
+      "assignations": {
+        "title": "Assignments",
+        "description": "Assign accountants to organisations per exercise."
+      },
+      "sections": {
+        "title": "Sections",
+        "description": "Organise programmes by Chamber sections."
+      },
+      "phases": {
+        "title": "Phases",
+        "description": "Configure audit workflow phases."
+      },
+      "steps": {
+        "title": "Steps",
+        "description": "Configure phase steps."
+      },
+      "document_types": {
+        "title": "Document types",
+        "description": "Configure accepted document types."
+      },
+      "procedures": {
+        "title": "Procedures",
+        "description": "Define audit procedure templates."
+      },
+      "procedure_steps": {
+        "title": "Procedure steps",
+        "description": "Associate and order steps within procedures."
+      },
+      "tags": {
+        "title": "Transitions",
+        "description": "Define step-to-step workflow transitions."
+      },
+      "teams": {
+        "title": "Teams",
+        "description": "Build audit teams per section."
+      }
+    }
+  },
+  "teams": {
+    "list": {
+      "title": "Teams",
+      "subtitle": "team(s) registered",
+      "create_btn": "New team",
+      "empty": "No teams",
+      "search_placeholder": "Search a team",
+      "unknown_section": "Unknown section",
+      "columns": {
+        "name": "Name",
+        "lead": "Team lead",
+        "section": "Section",
+        "members": "Members",
+        "actions": "Actions"
+      }
+    },
+    "create": { "title": "New team", "submit": "Create", "success": "Team created successfully" },
+    "edit": { "title": "Edit team", "submit": "Save", "success": "Team updated successfully" },
+    "fields": {
+      "name": "Name",
+      "name_placeholder": "Team name",
+      "section": "Section",
+      "section_placeholder": "Select a section",
+      "team_lead_name": "Lead name",
+      "team_lead_name_placeholder": "Name",
+      "team_lead_email": "Lead email",
+      "team_lead_email_placeholder": "lead@example.cm",
+      "team_lead_phone": "Phone",
+      "team_lead_phone_placeholder": "6XX XXX XXX",
+      "number_of_members": "Members",
+      "number_of_members_placeholder": "5"
+    }
+  },
+  "questionnaires": {
+    "list": {
+      "title": "Sent questionnaires",
+      "subtitle": "questionnaire(s) sent",
+      "empty": "No questionnaires",
+      "search_placeholder": "Search",
+      "status_filter_placeholder": "Status",
+      "view_file": "View file",
+      "response_editor_deferred": "The response editor lands when the questions/answers domain is ported.",
+      "columns": {
+        "name": "Name",
+        "send_date": "Sent at",
+        "return_date": "Returned at",
+        "status": "Status",
+        "files": "Files",
+        "actions": "Actions"
+      }
+    },
+    "status": {
+      "SENT": "Sent",
+      "RECEIVED": "Received",
+      "OVERDUE": "Overdue"
+    }
+  },
+  "tags": {
+    "list": {
+      "title": "Workflow transitions",
+      "subtitle": "transition(s) registered",
+      "create_btn": "New transition",
+      "empty": "No transitions",
+      "procedure_filter_placeholder": "Procedure",
+      "all_procedures": "All procedures",
+      "unknown_procedure": "Unknown procedure",
+      "columns": {
+        "procedure": "Procedure",
+        "edge": "Transition",
+        "duration": "Duration",
+        "actions": "Actions"
+      }
+    },
+    "create": {
+      "title": "New transition",
+      "submit": "Create",
+      "success": "Transition created successfully"
+    },
+    "fields": {
+      "procedure": "Procedure",
+      "procedure_placeholder": "Select a procedure",
+      "from_step": "From step",
+      "from_step_placeholder": "Select",
+      "to_step": "To step",
+      "to_step_placeholder": "Select",
+      "duration": "Duration",
+      "duration_placeholder": "e.g. 7 00:00:00"
+    }
+  },
+  "procedure_steps": {
+    "list": {
+      "title": "Procedure steps",
+      "subtitle": "procedure ↔ step link(s) registered",
+      "create_btn": "Add a step",
+      "empty": "No links",
+      "procedure_filter_placeholder": "Procedure",
+      "all_procedures": "All procedures",
+      "unknown_procedure": "Unknown procedure",
+      "unknown_step": "Unknown step",
+      "columns": {
+        "procedure": "Procedure",
+        "step": "Step",
+        "order": "Order",
+        "actions": "Actions"
+      }
+    },
+    "create": {
+      "title": "Add a step to a procedure",
+      "submit": "Add",
+      "success": "Step added successfully"
+    },
+    "fields": {
+      "procedure": "Procedure",
+      "procedure_placeholder": "Select a procedure",
+      "step": "Step",
+      "step_placeholder": "Select a step",
+      "order": "Order",
+      "order_placeholder": "1"
+    }
+  },
+  "accounting_reports": {
+    "list": {
+      "title": "Accounting reports",
+      "subtitle": "report(s) registered",
+      "empty": "No reports",
+      "org_filter_placeholder": "Organisation",
+      "all_orgs": "All organisations",
+      "unknown_org": "Unknown organisation",
+      "validate_action": "Validate",
+      "validate_success": "Report validated successfully",
+      "columns": {
+        "organization": "Organisation",
+        "fiscal_year": "Fiscal year",
+        "deposited_at": "Deposited at",
+        "status": "Status",
+        "actions": "Actions"
+      }
+    },
+    "status": {
+      "pending": "Pending",
+      "validated": "Validated"
+    },
+    "create": {
+      "trigger": "Deposit a report",
+      "title": "Deposit an accounting report",
+      "submit": "Deposit",
+      "success": "Report deposited successfully"
+    },
+    "fields": {
+      "organization": "Organisation",
+      "organization_placeholder": "Select an organisation",
+      "fiscal_year": "Fiscal year",
+      "fiscal_year_placeholder": "e.g. 2026",
+      "deposited_at": "Deposit date",
+      "deposited_by": "Deposited by (UUID)",
+      "deposited_by_placeholder": "UUID (optional)",
+      "acknowledge_receipt": "Acknowledgement (PDF)"
+    },
+    "upload": {
+      "hint": "Drop the acknowledgement PDF here",
+      "select": "Browse",
+      "submit": "Upload",
+      "uploading": "Uploading...",
+      "max_size": "Max size",
+      "too_large": "File too large",
+      "bad_type": "Unsupported file type"
+    }
+  },
+  "logs": {
+    "list": {
+      "title": "Audit logs",
+      "subtitle": "event(s) recorded",
+      "empty": "No events",
+      "search_placeholder": "Search",
+      "model_filter_placeholder": "Model",
+      "columns": {
+        "timestamp": "Timestamp",
+        "model": "Model",
+        "action": "Action",
+        "user": "User",
+        "object_id": "Identifier",
+        "changes": "Changes"
+      }
+    }
+  },
+  "controls": {
+    "list": {
+      "title": "Controls and audits",
+      "subtitle": "control(s) registered",
+      "create_btn": "New control",
+      "empty": "No controls",
+      "search_placeholder": "Search",
+      "status_filter_placeholder": "Status",
+      "unknown_org": "Unknown organisation",
+      "columns": {
+        "name": "Name",
+        "organization": "Organisation",
+        "exercise_year": "Exercise",
+        "status": "Status",
+        "actions": "Actions"
+      }
+    },
+    "status": {
+      "created": "Created",
+      "opened": "In progress",
+      "completed": "Completed"
+    },
+    "create": {
+      "title": "New control",
+      "submit": "Create",
+      "success": "Control created successfully"
+    },
+    "fields": {
+      "name": "Name",
+      "name_placeholder": "Control name (optional)",
+      "description": "Description",
+      "description_placeholder": "Description",
+      "organization": "Organisation",
+      "organization_placeholder": "Select an organisation",
+      "section": "Section",
+      "section_placeholder": "Select a section",
+      "procedure": "Procedure",
+      "procedure_placeholder": "Select a procedure",
+      "exercise_year": "Exercise",
+      "exercise_year_placeholder": "2026",
+      "loc": "Location",
+      "loc_placeholder": "Control location"
+    },
+    "detail": {
+      "back": "Back to controls",
+      "open_btn": "Open",
+      "close_btn": "Suspend",
+      "complete_btn": "Close",
+      "open_confirm_title": "Confirm opening",
+      "close_confirm_title": "Confirm suspension",
+      "complete_confirm_title": "Confirm closing",
+      "transition_confirm_description": "This transition will change the control's status.",
+      "transition_success": "Status updated successfully",
+      "steps_title": "Control steps",
+      "add_step_btn": "Add a step",
+      "add_step_title": "Add a step to the control",
+      "add_step_submit": "Add",
+      "add_step_success": "Step added successfully",
+      "next_step_label": "Next step",
+      "next_step_placeholder": "Select",
+      "no_steps": "No steps recorded for this control yet.",
+      "unknown_step": "Unknown step",
+      "completed_at": "Completed at",
+      "complete_step": "Mark as completed",
+      "reopen_step": "Reopen",
+      "upload_hint": "Drop a document here or click to browse",
+      "upload_select": "Browse",
+      "upload_submit": "Upload",
+      "upload_uploading": "Uploading...",
+      "upload_max_size": "Max size",
+      "upload_too_large": "File too large",
+      "upload_bad_type": "Unsupported file type",
+      "upload_success": "Document uploaded successfully"
+    }
+  },
+  "procedures": {
+    "list": {
+      "title": "Procedures",
+      "subtitle": "procedure(s) registered",
+      "create_btn": "New procedure",
+      "empty": "No procedures",
+      "search_placeholder": "Search a procedure",
+      "columns": { "name": "Name", "duration": "Duration", "alert": "Alert", "actions": "Actions" }
+    },
+    "create": {
+      "title": "New procedure",
+      "submit": "Create",
+      "success": "Procedure created successfully"
+    },
+    "edit": {
+      "title": "Edit procedure",
+      "submit": "Save",
+      "success": "Procedure updated successfully"
+    },
+    "fields": {
+      "name": "Name",
+      "name_placeholder": "Procedure name",
+      "duration": "Duration",
+      "duration_placeholder": "e.g. 90 00:00:00",
+      "alert": "Alert threshold",
+      "alert_placeholder": "e.g. 7 00:00:00"
+    }
+  },
+  "document_types": {
+    "list": {
+      "title": "Document types",
+      "subtitle": "type(s) registered",
+      "create_btn": "New type",
+      "empty": "No types",
+      "search_placeholder": "Search a type",
+      "columns": {
+        "name": "Name",
+        "short_name": "Short code",
+        "is_opening": "Opening doc",
+        "actions": "Actions"
+      }
+    },
+    "create": {
+      "title": "New document type",
+      "submit": "Create",
+      "success": "Type created successfully"
+    },
+    "edit": { "title": "Edit type", "submit": "Save", "success": "Type updated successfully" },
+    "fields": {
+      "name": "Name",
+      "name_placeholder": "Type name",
+      "short_name": "Short code",
+      "short_name_placeholder": "e.g. PV, RAP",
+      "is_opening_doc_type": "Opening document"
+    }
+  },
+  "phases": {
+    "list": {
+      "title": "Phases",
+      "subtitle": "phase(s) registered",
+      "create_btn": "New phase",
+      "empty": "No phases",
+      "search_placeholder": "Search a phase",
+      "columns": {
+        "name": "Name",
+        "duration": "Duration",
+        "status": "Status",
+        "actions": "Actions"
+      }
+    },
+    "create": { "title": "New phase", "submit": "Create", "success": "Phase created successfully" },
+    "edit": { "title": "Edit phase", "submit": "Save", "success": "Phase updated successfully" },
+    "fields": {
+      "name": "Name",
+      "name_placeholder": "Phase name",
+      "duration": "Duration (days)",
+      "duration_placeholder": "e.g. 30 00:00:00"
+    },
+    "status": { "active": "Active", "inactive": "Inactive" }
+  },
+  "steps": {
+    "list": {
+      "title": "Steps",
+      "subtitle": "step(s) registered",
+      "create_btn": "New step",
+      "empty": "No steps",
+      "search_placeholder": "Search a step",
+      "columns": {
+        "name": "Name",
+        "status": "Status",
+        "actions": "Actions"
+      }
+    },
+    "create": { "title": "New step", "submit": "Create", "success": "Step created successfully" },
+    "edit": { "title": "Edit step", "submit": "Save", "success": "Step updated successfully" },
+    "fields": {
+      "name": "Name",
+      "name_placeholder": "Step name"
+    },
+    "status": { "active": "Active", "inactive": "Inactive" }
+  },
+  "sections": {
+    "list": {
+      "title": "Sections",
+      "subtitle": "section(s) registered",
+      "create_btn": "New section",
+      "empty": "No sections",
+      "search_placeholder": "Search a section",
+      "columns": {
+        "name": "Name",
+        "program_year": "Year",
+        "status": "Status",
+        "actions": "Actions"
+      }
+    },
+    "create": {
+      "title": "New section",
+      "submit": "Create",
+      "success": "Section created successfully"
+    },
+    "detail": {
+      "back": "Back to sections",
+      "modify_btn": "Edit",
+      "save_btn": "Save",
+      "modify_success": "Section updated successfully"
+    },
+    "fields": {
+      "name": "Name",
+      "name_placeholder": "Section name",
+      "description": "Description",
+      "description_placeholder": "Description",
+      "program_year": "Programme year",
+      "program_year_placeholder": "2026",
+      "program": "Programme",
+      "program_placeholder": "Select a programme",
+      "president": "President (UUID)",
+      "president_placeholder": "President UUID",
+      "chief_clerk": "Chief clerk (UUID)",
+      "chief_clerk_placeholder": "Chief clerk UUID",
+      "clerk": "Clerk (UUID)",
+      "clerk_placeholder": "Clerk UUID"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    }
+  },
+  "assignations": {
+    "list": {
+      "title": "Assignments",
+      "subtitle": "assignment(s) registered",
+      "create_btn": "New assignment",
+      "empty": "No assignments",
+      "search_placeholder": "Search",
+      "unknown_org": "Unknown organisation",
+      "unknown_accountant": "Unknown accountant",
+      "columns": {
+        "organization": "Organisation",
+        "accountant": "Accountant",
+        "exercise_year": "Exercise",
+        "status": "Status",
+        "actions": "Actions"
+      },
+      "filters": {
+        "all_years": "All years",
+        "year_placeholder": "Year",
+        "all_orgs": "All organisations",
+        "org_placeholder": "Organisation"
+      }
+    },
+    "create": {
+      "title": "New assignment",
+      "submit": "Create",
+      "success": "Assignment created successfully"
+    },
+    "fields": {
+      "organization": "Organisation",
+      "organization_placeholder": "Select an organisation",
+      "accountant": "Accountant",
+      "accountant_placeholder": "Select an accountant",
+      "exercise_year": "Exercise year",
+      "exercise_year_placeholder": "Select a year"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    }
+  },
+  "programs": {
+    "list": {
+      "title": "Programmes",
+      "subtitle": "programme(s) registered",
+      "create_btn": "New programme",
+      "empty": "No programmes",
+      "search_placeholder": "Search by year",
+      "columns": {
+        "year": "Year",
+        "status": "Status",
+        "created_at": "Created at",
+        "actions": "Actions"
+      }
+    },
+    "create": {
+      "title": "New programme",
+      "submit": "Create",
+      "success": "Programme created successfully"
+    },
+    "detail": {
+      "back": "Back to programmes",
+      "modify_btn": "Edit",
+      "save_btn": "Save",
+      "modify_success": "Programme updated successfully",
+      "deferred_sections_note": "The sections / phases / steps tree will land when those domains are ported."
+    },
+    "fields": {
+      "year": "Year",
+      "year_placeholder": "2026",
+      "is_active": "Active programme",
+      "media_file": "Media file",
+      "current_file": "Current file"
+    },
+    "upload": {
+      "hint": "Drop a media file here",
+      "select": "Browse",
+      "submit": "Upload",
+      "uploading": "Uploading...",
+      "max_size": "Max size",
+      "too_large": "File too large",
+      "bad_type": "Unsupported file type",
+      "success": "File uploaded successfully"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    }
+  },
+  "accountants": {
+    "list": {
+      "title": "Accountants",
+      "subtitle": "accountant(s) registered",
+      "create_btn": "New accountant",
+      "empty": "No accountants",
+      "search_placeholder": "Search an accountant",
+      "columns": {
+        "name": "Full name",
+        "email": "Email",
+        "phone": "Phone",
+        "title": "Role",
+        "actions": "Actions"
+      }
+    },
+    "create": {
+      "title": "New accountant",
+      "submit": "Create",
+      "success": "Accountant created successfully"
+    },
+    "edit": {
+      "title": "Edit accountant",
+      "submit": "Save",
+      "success": "Accountant updated successfully"
+    },
+    "fields": {
+      "first_name": "First name",
+      "first_name_placeholder": "First name",
+      "last_name": "Last name",
+      "last_name_placeholder": "Last name",
+      "email": "Email",
+      "email_placeholder": "accountant@example.cm",
+      "phone": "Phone",
+      "phone_placeholder": "6XX XXX XXX",
+      "title": "Role",
+      "title_placeholder": "Accountant role",
+      "accountant_id": "Accountant ID",
+      "accountant_id_placeholder": "Identification number"
+    }
+  },
+  "organisations": {
+    "list": {
+      "title": "Organisations",
+      "subtitle": "organisation(s) registered",
+      "create_btn": "New organisation",
+      "empty": "No organisations",
+      "search_placeholder": "Search an organisation",
+      "type_filter_placeholder": "Type",
+      "columns": {
+        "name": "Organisation",
+        "type": "Type",
+        "contact": "Contact",
+        "email": "Email",
+        "actions": "Actions"
+      }
+    },
+    "create": {
+      "title": "New organisation",
+      "submit": "Create",
+      "success": "Organisation created successfully",
+      "fields": {
+        "name": "Name",
+        "name_placeholder": "Organisation name",
+        "address": "Address",
+        "address_placeholder": "Organisation address",
+        "phone": "Phone",
+        "phone_placeholder": "6XX XXX XXX",
+        "email": "Email",
+        "email_placeholder": "contact@example.cm",
+        "type": "Type",
+        "type_placeholder": "Select a type"
+      }
+    },
+    "types": {
+      "public": "Public",
+      "para-public": "Para-public"
+    },
+    "detail": {
+      "back": "Back to list",
+      "modify_btn": "Edit",
+      "save_btn": "Save",
+      "modify_success": "Organisation updated successfully",
+      "assignments_title": "Assigned accountants"
+    }
+  }
+}

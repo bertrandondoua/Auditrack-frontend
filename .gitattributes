@@ -1,0 +1,15 @@
+# Normalise line endings: store everything as LF in the repo, check out
+# native on each platform. Prevents the whole tree showing as "modified"
+# when developers on Windows vs. Linux/Mac touch files.
+* text=auto eol=lf
+
+# Binary assets — never normalise.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary

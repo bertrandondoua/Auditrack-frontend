@@ -1,0 +1,826 @@
+{
+  "lang": "fr",
+  "notification": {
+    "error": "Erreur",
+    "success": "Succès",
+    "otp_sent": "OTP envoyé avec succès",
+    "otp_verified": "OTP vérifié avec succès",
+    "fill_fields": "Veuillez remplir tous les champs",
+    "reset_not_same_pwd": "Le nouveau mot de passe et le mot de passe de confirmation ne sont pas les mêmes",
+    "reset_same_pwd": "L'ancien et le nouveau mot de passe ne doivent pas être les mêmes",
+    "resset_pswd_success": "Mot de passe réinitialisé avec succès",
+    "permission_denied": "Vous n'avez pas la permission d'effectuer cette action"
+  },
+  "signin": {
+    "login_Success": "L'utilisateur s'est identifié avec succès",
+    "mail": "Entrez votre email",
+    "password_msg": "Entrez votre mot de passe",
+    "password": "Mot de passe",
+    "welcome": "Bienvenue !",
+    "login": "Connexion",
+    "fogot_pass": "Mot de passe oublié ?"
+  },
+  "forgot_password": {
+    "title": "Réinitialiser le mot de passe de sécurité",
+    "subtitle": "Entrez votre adresse e-mail associée au compte",
+    "label": "Email",
+    "placeholder": "Entrez votre adresse Email",
+    "btn1": "Annuler",
+    "btn2": "Continuer"
+  },
+  "otp": {
+    "title": "Code de vérification",
+    "subtitle": "Un code de vérification a été envoyé à votre email. Veuillez vérifier vos messages pour le récupérer.",
+    "btn": "Continuer",
+    "code_validity": "Validité du code :",
+    "resend": "Renvoyer"
+  },
+  "new_password": "Nouveau mot de passe",
+  "routes": {
+    "home": "Accueil",
+    "control_audit": "Contrôle et audits",
+    "org": "Organismes",
+    "sanction": "Sanctions",
+    "account": "Comptes",
+    "report": "Rapports",
+    "settings": "Paramètres",
+    "help": "Aide et support",
+    "logout": "Déconnexion",
+    "config": "Configurations",
+    "perm": "Permissions",
+    "logs": "Logs"
+  },
+  "header": {
+    "search": "Mot-clé (Organisations, Audit...)",
+    "searchNotFound": "Aucun résultat trouvé"
+  },
+  "dashboard": {
+    "hello": {
+      "title": "Bienvenue",
+      "subtitle": "Bienvenue sur votre tableau de bord personnalisé."
+    },
+    "stats": {
+      "total_controls": "Contrôles totaux",
+      "in_progress": "En cours",
+      "completed": "Clôturés",
+      "organisations": "Organismes",
+      "accountants": "Comptables",
+      "programs": "Programmes",
+      "reports": "Rapports"
+    },
+    "recent_reports_title": "Derniers rapports comptables",
+    "no_recent_reports": "Aucun rapport récent.",
+    "quick_actions_title": "Actions rapides",
+    "see_all": "Tout voir",
+    "actions": {
+      "view_controls": "Voir les contrôles",
+      "view_orgs": "Voir les organismes",
+      "view_config": "Configurations",
+      "view_reports": "Voir les rapports"
+    }
+  },
+  "users": {
+    "list": {
+      "title": "Utilisateurs",
+      "subtitle": "utilisateur(s) enregistré(s)",
+      "create_btn": "Nouvel utilisateur",
+      "empty": "Aucun utilisateur",
+      "search_placeholder": "Rechercher un utilisateur",
+      "columns": {
+        "name": "Nom complet",
+        "email": "Email",
+        "role": "Rôle",
+        "status": "Statut",
+        "actions": "Actions"
+      }
+    },
+    "create": {
+      "title": "Nouvel utilisateur",
+      "submit": "Créer",
+      "success": "Utilisateur créé avec succès"
+    },
+    "edit": {
+      "title": "Modifier l'utilisateur",
+      "submit": "Enregistrer",
+      "success": "Utilisateur mis à jour avec succès"
+    },
+    "fields": {
+      "first_name": "Prénom",
+      "first_name_placeholder": "Prénom",
+      "last_name": "Nom",
+      "last_name_placeholder": "Nom",
+      "email": "Email",
+      "email_placeholder": "user@example.cm",
+      "phone": "Téléphone",
+      "phone_placeholder": "6XX XXX XXX",
+      "position": "Fonction",
+      "position_placeholder": "Fonction",
+      "role": "Rôle",
+      "role_placeholder": "Sélectionner un rôle"
+    },
+    "status": { "active": "Actif", "inactive": "Inactif" }
+  },
+  "permissions": {
+    "title": "Permissions",
+    "subtitle": "Matrice des rôles et permissions",
+    "deferred_title": "Matrice RBAC à venir",
+    "deferred_body": "L'éditeur de matrice de permissions (cocher/décocher par rôle) sera livré lorsque le backend exposera /accounts/permissions/. Les rôles sont actuellement codés en dur dans src/configs/constants.ts."
+  },
+  "sanction": {
+    "title": "Sanctions",
+    "subtitle": "Sanctions de faute de gestion",
+    "deferred_body": "Le module sanctions sera disponible dans une prochaine itération. Les contrôles de type sanction passent actuellement par /control avec un filtre dédié."
+  },
+  "settings": {
+    "title": "Paramètres",
+    "subtitle": "Préférences personnelles et compte",
+    "deferred_body": "Les écrans de paramétrage personnel (langue, mot de passe, notifications) arriveront avec le portage du domaine settings."
+  },
+  "support": {
+    "title": "Aide et support",
+    "subtitle": "Contactez l'équipe support",
+    "deferred_body": "Le centre d'aide sera disponible dans une prochaine itération."
+  },
+  "deferred_backend": {
+    "phases": "L'API backend (Auditrack-api) n'expose pas encore l'endpoint /core/phases/. Ce module sera activé dès que la ressource Phase sera disponible côté serveur. Voir BACKEND_MISMATCHES.md.",
+    "questionnaires": "L'API backend n'expose pas encore /core/sent-questionnaire/. La liste des questionnaires envoyés sera disponible dès que la ressource arrive côté serveur.",
+    "logs": "L'API backend n'expose pas encore /core/history/ ni d'actions history par modèle. Le visualiseur de journaux sera activé dès qu'une source d'événements est disponible côté serveur.",
+    "otp_disabled": "La vérification OTP n'est pas activée sur ce serveur. Connectez-vous directement avec votre email et mot de passe."
+  },
+  "common": {
+    "close": "Fermer",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "loading": "Chargement...",
+    "filter": "Filtrer",
+    "search": "Rechercher",
+    "all": "Tous",
+    "actions": {
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "confirm_delete_title": "Confirmer la suppression",
+      "confirm_delete_description": "Cette action est irréversible. Voulez-vous continuer ?",
+      "delete_success": "Suppression effectuée avec succès",
+      "update_success": "Mise à jour effectuée avec succès"
+    }
+  },
+  "configuration": {
+    "landing": {
+      "title": "Configurations",
+      "subtitle": "Paramétrer les référentiels et les acteurs du système.",
+      "accountants": {
+        "title": "Comptables",
+        "description": "Gérer les comptables publics et para-publics."
+      },
+      "programs": {
+        "title": "Programmes",
+        "description": "Définir les programmes annuels d'audit."
+      },
+      "assignations": {
+        "title": "Affectations",
+        "description": "Affecter les comptables aux organismes par exercice."
+      },
+      "sections": {
+        "title": "Sections",
+        "description": "Organiser les programmes par sections de la Chambre."
+      },
+      "phases": {
+        "title": "Phases",
+        "description": "Paramétrer les phases du workflow d'audit."
+      },
+      "steps": {
+        "title": "Étapes",
+        "description": "Paramétrer les étapes des phases."
+      },
+      "document_types": {
+        "title": "Types de documents",
+        "description": "Paramétrer les types de documents acceptés."
+      },
+      "procedures": {
+        "title": "Procédures",
+        "description": "Définir les procédures de contrôle (modèles)."
+      },
+      "procedure_steps": {
+        "title": "Étapes des procédures",
+        "description": "Associer et ordonner les étapes au sein des procédures."
+      },
+      "tags": {
+        "title": "Transitions",
+        "description": "Définir les transitions entre étapes (workflow)."
+      },
+      "teams": {
+        "title": "Équipes",
+        "description": "Constituer les équipes d'audit par section."
+      }
+    }
+  },
+  "teams": {
+    "list": {
+      "title": "Équipes",
+      "subtitle": "équipe(s) enregistrée(s)",
+      "create_btn": "Nouvelle équipe",
+      "empty": "Aucune équipe",
+      "search_placeholder": "Rechercher une équipe",
+      "unknown_section": "Section inconnue",
+      "columns": {
+        "name": "Nom",
+        "lead": "Chef d'équipe",
+        "section": "Section",
+        "members": "Membres",
+        "actions": "Actions"
+      }
+    },
+    "create": {
+      "title": "Nouvelle équipe",
+      "submit": "Créer",
+      "success": "Équipe créée avec succès"
+    },
+    "edit": {
+      "title": "Modifier l'équipe",
+      "submit": "Enregistrer",
+      "success": "Équipe mise à jour avec succès"
+    },
+    "fields": {
+      "name": "Nom",
+      "name_placeholder": "Nom de l'équipe",
+      "section": "Section",
+      "section_placeholder": "Sélectionner une section",
+      "team_lead_name": "Nom du chef",
+      "team_lead_name_placeholder": "Nom",
+      "team_lead_email": "Email du chef",
+      "team_lead_email_placeholder": "chef@example.cm",
+      "team_lead_phone": "Téléphone",
+      "team_lead_phone_placeholder": "6XX XXX XXX",
+      "number_of_members": "Nombre de membres",
+      "number_of_members_placeholder": "5"
+    }
+  },
+  "questionnaires": {
+    "list": {
+      "title": "Questionnaires envoyés",
+      "subtitle": "questionnaire(s) envoyé(s)",
+      "empty": "Aucun questionnaire",
+      "search_placeholder": "Rechercher",
+      "status_filter_placeholder": "Statut",
+      "view_file": "Voir le fichier",
+      "response_editor_deferred": "L'éditeur de réponses sera disponible quand le domaine questions/réponses sera porté.",
+      "columns": {
+        "name": "Nom",
+        "send_date": "Envoyé le",
+        "return_date": "Retourné le",
+        "status": "Statut",
+        "files": "Fichiers",
+        "actions": "Actions"
+      }
+    },
+    "status": {
+      "SENT": "Envoyé",
+      "RECEIVED": "Reçu",
+      "OVERDUE": "En retard"
+    }
+  },
+  "tags": {
+    "list": {
+      "title": "Transitions de workflow",
+      "subtitle": "transition(s) enregistrée(s)",
+      "create_btn": "Nouvelle transition",
+      "empty": "Aucune transition",
+      "procedure_filter_placeholder": "Procédure",
+      "all_procedures": "Toutes les procédures",
+      "unknown_procedure": "Procédure inconnue",
+      "columns": {
+        "procedure": "Procédure",
+        "edge": "Transition",
+        "duration": "Durée",
+        "actions": "Actions"
+      }
+    },
+    "create": {
+      "title": "Nouvelle transition",
+      "submit": "Créer",
+      "success": "Transition créée avec succès"
+    },
+    "fields": {
+      "procedure": "Procédure",
+      "procedure_placeholder": "Sélectionner une procédure",
+      "from_step": "Étape de départ",
+      "from_step_placeholder": "Sélectionner",
+      "to_step": "Étape d'arrivée",
+      "to_step_placeholder": "Sélectionner",
+      "duration": "Durée",
+      "duration_placeholder": "Ex: 7 00:00:00"
+    }
+  },
+  "procedure_steps": {
+    "list": {
+      "title": "Étapes des procédures",
+      "subtitle": "lien(s) procédure ↔ étape enregistré(s)",
+      "create_btn": "Ajouter une étape",
+      "empty": "Aucun lien",
+      "procedure_filter_placeholder": "Procédure",
+      "all_procedures": "Toutes les procédures",
+      "unknown_procedure": "Procédure inconnue",
+      "unknown_step": "Étape inconnue",
+      "columns": {
+        "procedure": "Procédure",
+        "step": "Étape",
+        "order": "Ordre",
+        "actions": "Actions"
+      }
+    },
+    "create": {
+      "title": "Ajouter une étape à une procédure",
+      "submit": "Ajouter",
+      "success": "Étape ajoutée avec succès"
+    },
+    "fields": {
+      "procedure": "Procédure",
+      "procedure_placeholder": "Sélectionner une procédure",
+      "step": "Étape",
+      "step_placeholder": "Sélectionner une étape",
+      "order": "Ordre",
+      "order_placeholder": "1"
+    }
+  },
+  "accounting_reports": {
+    "list": {
+      "title": "Rapports comptables",
+      "subtitle": "rapport(s) enregistré(s)",
+      "empty": "Aucun rapport",
+      "org_filter_placeholder": "Organisme",
+      "all_orgs": "Tous les organismes",
+      "unknown_org": "Organisme inconnu",
+      "validate_action": "Valider",
+      "validate_success": "Rapport validé avec succès",
+      "columns": {
+        "organization": "Organisme",
+        "fiscal_year": "Exercice",
+        "deposited_at": "Date de dépôt",
+        "status": "Statut",
+        "actions": "Actions"
+      }
+    },
+    "status": {
+      "pending": "En attente",
+      "validated": "Validé"
+    },
+    "create": {
+      "trigger": "Déposer un rapport",
+      "title": "Déposer un rapport comptable",
+      "submit": "Déposer",
+      "success": "Rapport déposé avec succès"
+    },
+    "fields": {
+      "organization": "Organisme",
+      "organization_placeholder": "Sélectionner un organisme",
+      "fiscal_year": "Exercice",
+      "fiscal_year_placeholder": "Ex: 2026",
+      "deposited_at": "Date de dépôt",
+      "deposited_by": "Déposé par (UUID)",
+      "deposited_by_placeholder": "UUID (optionnel)",
+      "acknowledge_receipt": "Récépissé (PDF)"
+    },
+    "upload": {
+      "hint": "Déposez le récépissé (PDF) ici",
+      "select": "Parcourir",
+      "submit": "Téléverser",
+      "uploading": "Téléversement...",
+      "max_size": "Taille maximum",
+      "too_large": "Fichier trop volumineux",
+      "bad_type": "Type de fichier non supporté"
+    }
+  },
+  "logs": {
+    "list": {
+      "title": "Journaux d'audit",
+      "subtitle": "événement(s) enregistré(s)",
+      "empty": "Aucun événement",
+      "search_placeholder": "Rechercher",
+      "model_filter_placeholder": "Modèle",
+      "columns": {
+        "timestamp": "Horodatage",
+        "model": "Modèle",
+        "action": "Action",
+        "user": "Utilisateur",
+        "object_id": "Identifiant",
+        "changes": "Changements"
+      }
+    }
+  },
+  "controls": {
+    "list": {
+      "title": "Contrôles et audits",
+      "subtitle": "contrôle(s) enregistré(s)",
+      "create_btn": "Nouveau contrôle",
+      "empty": "Aucun contrôle",
+      "search_placeholder": "Rechercher",
+      "status_filter_placeholder": "Statut",
+      "unknown_org": "Organisme inconnu",
+      "columns": {
+        "name": "Nom",
+        "organization": "Organisme",
+        "exercise_year": "Exercice",
+        "status": "Statut",
+        "actions": "Actions"
+      }
+    },
+    "status": {
+      "created": "Créé",
+      "opened": "En cours",
+      "completed": "Clôturé"
+    },
+    "create": {
+      "title": "Nouveau contrôle",
+      "submit": "Créer",
+      "success": "Contrôle créé avec succès"
+    },
+    "fields": {
+      "name": "Nom",
+      "name_placeholder": "Nom du contrôle (optionnel)",
+      "description": "Description",
+      "description_placeholder": "Description",
+      "organization": "Organisme",
+      "organization_placeholder": "Sélectionner un organisme",
+      "section": "Section",
+      "section_placeholder": "Sélectionner une section",
+      "procedure": "Procédure",
+      "procedure_placeholder": "Sélectionner une procédure",
+      "exercise_year": "Exercice",
+      "exercise_year_placeholder": "2026",
+      "loc": "Lieu",
+      "loc_placeholder": "Lieu du contrôle"
+    },
+    "detail": {
+      "back": "Retour aux contrôles",
+      "open_btn": "Ouvrir",
+      "close_btn": "Suspendre",
+      "complete_btn": "Clôturer",
+      "open_confirm_title": "Confirmer l'ouverture",
+      "close_confirm_title": "Confirmer la suspension",
+      "complete_confirm_title": "Confirmer la clôture",
+      "transition_confirm_description": "Cette transition modifiera le statut du contrôle.",
+      "transition_success": "Statut mis à jour avec succès",
+      "steps_title": "Étapes du contrôle",
+      "add_step_btn": "Ajouter une étape",
+      "add_step_title": "Ajouter une étape au contrôle",
+      "add_step_submit": "Ajouter",
+      "add_step_success": "Étape ajoutée avec succès",
+      "next_step_label": "Étape suivante",
+      "next_step_placeholder": "Sélectionner",
+      "no_steps": "Aucune étape enregistrée pour ce contrôle.",
+      "unknown_step": "Étape inconnue",
+      "completed_at": "Clôturée le",
+      "complete_step": "Marquer comme terminée",
+      "reopen_step": "Rouvrir",
+      "upload_hint": "Déposez un document ici ou cliquez pour parcourir",
+      "upload_select": "Parcourir",
+      "upload_submit": "Téléverser",
+      "upload_uploading": "Téléversement...",
+      "upload_max_size": "Taille max",
+      "upload_too_large": "Fichier trop volumineux",
+      "upload_bad_type": "Type de fichier non supporté",
+      "upload_success": "Document téléversé avec succès"
+    }
+  },
+  "procedures": {
+    "list": {
+      "title": "Procédures",
+      "subtitle": "procédure(s) enregistrée(s)",
+      "create_btn": "Nouvelle procédure",
+      "empty": "Aucune procédure",
+      "search_placeholder": "Rechercher une procédure",
+      "columns": { "name": "Nom", "duration": "Durée", "alert": "Alerte", "actions": "Actions" }
+    },
+    "create": {
+      "title": "Nouvelle procédure",
+      "submit": "Créer",
+      "success": "Procédure créée avec succès"
+    },
+    "edit": {
+      "title": "Modifier la procédure",
+      "submit": "Enregistrer",
+      "success": "Procédure mise à jour avec succès"
+    },
+    "fields": {
+      "name": "Nom",
+      "name_placeholder": "Nom de la procédure",
+      "duration": "Durée",
+      "duration_placeholder": "Ex: 90 00:00:00",
+      "alert": "Seuil d'alerte",
+      "alert_placeholder": "Ex: 7 00:00:00"
+    }
+  },
+  "document_types": {
+    "list": {
+      "title": "Types de documents",
+      "subtitle": "type(s) enregistré(s)",
+      "create_btn": "Nouveau type",
+      "empty": "Aucun type",
+      "search_placeholder": "Rechercher un type",
+      "columns": {
+        "name": "Nom",
+        "short_name": "Code court",
+        "is_opening": "Doc d'ouverture",
+        "actions": "Actions"
+      }
+    },
+    "create": {
+      "title": "Nouveau type de document",
+      "submit": "Créer",
+      "success": "Type créé avec succès"
+    },
+    "edit": {
+      "title": "Modifier le type",
+      "submit": "Enregistrer",
+      "success": "Type mis à jour avec succès"
+    },
+    "fields": {
+      "name": "Nom",
+      "name_placeholder": "Nom du type",
+      "short_name": "Code court",
+      "short_name_placeholder": "Ex: PV, RAP",
+      "is_opening_doc_type": "Document d'ouverture"
+    }
+  },
+  "phases": {
+    "list": {
+      "title": "Phases",
+      "subtitle": "phase(s) enregistrée(s)",
+      "create_btn": "Nouvelle phase",
+      "empty": "Aucune phase",
+      "search_placeholder": "Rechercher une phase",
+      "columns": {
+        "name": "Nom",
+        "duration": "Durée",
+        "status": "Statut",
+        "actions": "Actions"
+      }
+    },
+    "create": {
+      "title": "Nouvelle phase",
+      "submit": "Créer",
+      "success": "Phase créée avec succès"
+    },
+    "edit": {
+      "title": "Modifier la phase",
+      "submit": "Enregistrer",
+      "success": "Phase mise à jour avec succès"
+    },
+    "fields": {
+      "name": "Nom",
+      "name_placeholder": "Nom de la phase",
+      "duration": "Durée (jours)",
+      "duration_placeholder": "Ex: 30 00:00:00"
+    },
+    "status": { "active": "Active", "inactive": "Inactive" }
+  },
+  "steps": {
+    "list": {
+      "title": "Étapes",
+      "subtitle": "étape(s) enregistrée(s)",
+      "create_btn": "Nouvelle étape",
+      "empty": "Aucune étape",
+      "search_placeholder": "Rechercher une étape",
+      "columns": {
+        "name": "Nom",
+        "status": "Statut",
+        "actions": "Actions"
+      }
+    },
+    "create": {
+      "title": "Nouvelle étape",
+      "submit": "Créer",
+      "success": "Étape créée avec succès"
+    },
+    "edit": {
+      "title": "Modifier l'étape",
+      "submit": "Enregistrer",
+      "success": "Étape mise à jour avec succès"
+    },
+    "fields": {
+      "name": "Nom",
+      "name_placeholder": "Nom de l'étape"
+    },
+    "status": { "active": "Active", "inactive": "Inactive" }
+  },
+  "sections": {
+    "list": {
+      "title": "Sections",
+      "subtitle": "section(s) enregistrée(s)",
+      "create_btn": "Nouvelle section",
+      "empty": "Aucune section",
+      "search_placeholder": "Rechercher une section",
+      "columns": {
+        "name": "Nom",
+        "program_year": "Année",
+        "status": "Statut",
+        "actions": "Actions"
+      }
+    },
+    "create": {
+      "title": "Nouvelle section",
+      "submit": "Créer",
+      "success": "Section créée avec succès"
+    },
+    "detail": {
+      "back": "Retour aux sections",
+      "modify_btn": "Modifier",
+      "save_btn": "Enregistrer",
+      "modify_success": "Section mise à jour avec succès"
+    },
+    "fields": {
+      "name": "Nom",
+      "name_placeholder": "Nom de la section",
+      "description": "Description",
+      "description_placeholder": "Description",
+      "program_year": "Année du programme",
+      "program_year_placeholder": "2026",
+      "program": "Programme",
+      "program_placeholder": "Sélectionner un programme",
+      "president": "Président (UUID)",
+      "president_placeholder": "UUID du président",
+      "chief_clerk": "Greffier en chef (UUID)",
+      "chief_clerk_placeholder": "UUID du greffier en chef",
+      "clerk": "Greffier (UUID)",
+      "clerk_placeholder": "UUID du greffier"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    }
+  },
+  "assignations": {
+    "list": {
+      "title": "Affectations",
+      "subtitle": "affectation(s) enregistrée(s)",
+      "create_btn": "Nouvelle affectation",
+      "empty": "Aucune affectation",
+      "search_placeholder": "Rechercher",
+      "unknown_org": "Organisme inconnu",
+      "unknown_accountant": "Comptable inconnu",
+      "columns": {
+        "organization": "Organisme",
+        "accountant": "Comptable",
+        "exercise_year": "Exercice",
+        "status": "Statut",
+        "actions": "Actions"
+      },
+      "filters": {
+        "all_years": "Toutes les années",
+        "year_placeholder": "Année",
+        "all_orgs": "Tous les organismes",
+        "org_placeholder": "Organisme"
+      }
+    },
+    "create": {
+      "title": "Nouvelle affectation",
+      "submit": "Créer",
+      "success": "Affectation créée avec succès"
+    },
+    "fields": {
+      "organization": "Organisme",
+      "organization_placeholder": "Sélectionner un organisme",
+      "accountant": "Comptable",
+      "accountant_placeholder": "Sélectionner un comptable",
+      "exercise_year": "Année d'exercice",
+      "exercise_year_placeholder": "Sélectionner une année"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    }
+  },
+  "programs": {
+    "list": {
+      "title": "Programmes",
+      "subtitle": "programme(s) enregistré(s)",
+      "create_btn": "Nouveau programme",
+      "empty": "Aucun programme",
+      "search_placeholder": "Rechercher par année",
+      "columns": {
+        "year": "Année",
+        "status": "Statut",
+        "created_at": "Créé le",
+        "actions": "Actions"
+      }
+    },
+    "create": {
+      "title": "Nouveau programme",
+      "submit": "Créer",
+      "success": "Programme créé avec succès"
+    },
+    "detail": {
+      "back": "Retour aux programmes",
+      "modify_btn": "Modifier",
+      "save_btn": "Enregistrer",
+      "modify_success": "Programme mis à jour avec succès",
+      "deferred_sections_note": "L'arborescence sections / phases / étapes sera disponible quand ces domaines seront portés."
+    },
+    "fields": {
+      "year": "Année",
+      "year_placeholder": "2026",
+      "is_active": "Programme actif",
+      "media_file": "Fichier",
+      "current_file": "Fichier actuel"
+    },
+    "upload": {
+      "hint": "Déposez un fichier ici",
+      "select": "Parcourir",
+      "submit": "Téléverser",
+      "uploading": "Téléversement...",
+      "max_size": "Taille maximum",
+      "too_large": "Fichier trop volumineux",
+      "bad_type": "Type de fichier non supporté",
+      "success": "Fichier téléversé avec succès"
+    },
+    "status": {
+      "active": "Actif",
+      "inactive": "Inactif"
+    }
+  },
+  "accountants": {
+    "list": {
+      "title": "Comptables",
+      "subtitle": "comptable(s) enregistré(s)",
+      "create_btn": "Nouveau comptable",
+      "empty": "Aucun comptable",
+      "search_placeholder": "Rechercher un comptable",
+      "columns": {
+        "name": "Nom complet",
+        "email": "Email",
+        "phone": "Téléphone",
+        "title": "Fonction",
+        "actions": "Actions"
+      }
+    },
+    "create": {
+      "title": "Nouveau comptable",
+      "submit": "Créer",
+      "success": "Comptable créé avec succès"
+    },
+    "edit": {
+      "title": "Modifier le comptable",
+      "submit": "Enregistrer",
+      "success": "Comptable mis à jour avec succès"
+    },
+    "fields": {
+      "first_name": "Prénom",
+      "first_name_placeholder": "Prénom du comptable",
+      "last_name": "Nom",
+      "last_name_placeholder": "Nom du comptable",
+      "email": "Email",
+      "email_placeholder": "comptable@example.cm",
+      "phone": "Téléphone",
+      "phone_placeholder": "6XX XXX XXX",
+      "title": "Fonction",
+      "title_placeholder": "Fonction du comptable",
+      "accountant_id": "Identifiant comptable",
+      "accountant_id_placeholder": "Numéro d'identification"
+    }
+  },
+  "organisations": {
+    "list": {
+      "title": "Organismes",
+      "subtitle": "organisme(s) enregistré(s)",
+      "create_btn": "Nouvel organisme",
+      "empty": "Aucun organisme",
+      "search_placeholder": "Rechercher un organisme",
+      "type_filter_placeholder": "Type",
+      "columns": {
+        "name": "Organisme",
+        "type": "Type",
+        "contact": "Contact",
+        "email": "Email",
+        "actions": "Actions"
+      }
+    },
+    "create": {
+      "title": "Nouvel organisme",
+      "submit": "Créer",
+      "success": "Organisme créé avec succès",
+      "fields": {
+        "name": "Nom",
+        "name_placeholder": "Nom de l'organisme",
+        "address": "Adresse",
+        "address_placeholder": "Adresse de l'organisme",
+        "phone": "Téléphone",
+        "phone_placeholder": "6XX XXX XXX",
+        "email": "Email",
+        "email_placeholder": "contact@example.cm",
+        "type": "Type",
+        "type_placeholder": "Sélectionner un type"
+      }
+    },
+    "types": {
+      "public": "Public",
+      "para-public": "Para-public"
+    },
+    "detail": {
+      "back": "Retour à la liste",
+      "modify_btn": "Modifier",
+      "save_btn": "Enregistrer",
+      "modify_success": "Organisme mis à jour avec succès",
+      "assignments_title": "Comptables affectés"
+    }
+  }
+}
