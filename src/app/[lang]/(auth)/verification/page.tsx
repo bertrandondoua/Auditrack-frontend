@@ -1,6 +1,22 @@
+import type { Metadata } from "next";
+
 import VerificationForm from "@/features/auth/verification/form";
 import type { Locale } from "@/i18n-config";
 import { getDictionary } from "@/lib/dictionaries";
+import { pageMetadata } from "@/lib/seo";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { lang: Locale };
+}): Promise<Metadata> {
+  const dict = await getDictionary(params.lang);
+  return pageMetadata({
+    lang: params.lang,
+    path: "/verification",
+    title: dict.seo.titles.verification,
+  });
+}
 
 /**
  * OTP verification step. Reached from signin / forgot-password when the
