@@ -10,12 +10,14 @@ export interface UserColumnsOptions {
   dict: Dict;
   onEdit: (user: User) => void;
   onDelete: (user: User) => void;
+  onResetPassword: (user: User) => void;
 }
 
 export function buildUserColumns({
   dict,
   onEdit,
   onDelete,
+  onResetPassword,
 }: UserColumnsOptions): ColumnDef<User>[] {
   const cols = dict.users.list.columns;
 
@@ -81,6 +83,10 @@ export function buildUserColumns({
         <RowActionsMenu
           items={[
             { label: dict.common.actions.edit, onClick: () => onEdit(row.original) },
+            {
+              label: dict.users.reset.action,
+              onClick: () => onResetPassword(row.original),
+            },
             {
               label: dict.common.actions.delete,
               onClick: () => onDelete(row.original),
