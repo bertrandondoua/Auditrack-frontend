@@ -18,10 +18,14 @@ export interface AccountingReport {
   section: string;
   /** UUID of the document attached as acknowledgement (nullable). */
   acknowledge_receipt?: string | null;
-  /** Read-only display string the backend embeds for the linked org. */
-  organization_details?: string;
-  /** Read-only display string the backend embeds for the linked section. */
-  section_details?: string;
+  /**
+   * Read-only embed for the linked org. drf-yasg types it as `string`, but at
+   * runtime it can be a nested object (e.g. `{ name, email }`). Pass through
+   * `embedLabel()` before rendering. See lib/utils.ts.
+   */
+  organization_details?: string | Record<string, unknown> | null;
+  /** Read-only embed for the linked section (string or nested object). */
+  section_details?: string | Record<string, unknown> | null;
   created_at?: string;
   updated_at?: string;
   created_by?: string | null;
