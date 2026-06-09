@@ -1,0 +1,11 @@
+node_modules/
+.next/
+out/
+build/
+dist/
+coverage/
+*.log
+*.lock
+package-lock.json
+public/
+openapi.json
