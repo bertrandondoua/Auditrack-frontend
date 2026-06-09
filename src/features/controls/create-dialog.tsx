@@ -19,9 +19,6 @@ import { useGetProceduresQuery } from "@/redux/features/procedures/proceduresApi
 import { useGetSectionsQuery } from "@/redux/features/sections/sectionsApiSlice";
 
 const schema = z.object({
-  name: z.string().optional().default(""),
-  description: z.string().optional().default(""),
-  loc: z.string().optional().default(""),
   exercise_year: z
     .union([z.string(), z.number()])
     .transform((v) => Number(v))
@@ -65,9 +62,6 @@ export default function CreateControlDialog({ dict }: { dict: Dict }) {
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
-      name: "",
-      description: "",
-      loc: "",
       exercise_year: currentYear,
       organization: "",
       section: "",
@@ -79,9 +73,6 @@ export default function CreateControlDialog({ dict }: { dict: Dict }) {
     handleSubmit(async (values) => {
       try {
         const res = await createControl({
-          name: values.name || null,
-          description: values.description || null,
-          loc: values.loc || undefined,
           exercise_year: values.exercise_year,
           organization: values.organization,
           section: values.section,
@@ -115,12 +106,6 @@ export default function CreateControlDialog({ dict }: { dict: Dict }) {
       )}
     >
       <form className="flex flex-col gap-4">
-        <FormField label={f.name} placeholder={f.name_placeholder} inputProps={register("name")} />
-        <FormField
-          label={f.description}
-          placeholder={f.description_placeholder}
-          inputProps={register("description")}
-        />
         <div className="grid grid-cols-2 gap-4">
           <Controller
             control={control}
@@ -171,7 +156,6 @@ export default function CreateControlDialog({ dict }: { dict: Dict }) {
             inputProps={register("exercise_year")}
           />
         </div>
-        <FormField label={f.loc} placeholder={f.loc_placeholder} inputProps={register("loc")} />
         {Object.keys(errors).length > 0 && (
           <p className="text-sm text-destructive">
             {Object.values(errors)[0]?.message ?? "Invalid input"}

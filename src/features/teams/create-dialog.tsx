@@ -53,7 +53,7 @@ export default function CreateTeamDialog({ dict }: { dict: Dict }) {
           team_lead_email: values.team_lead_email,
           team_lead_phone_number: normalizePhone(values.team_lead_phone_number),
           number_of_members: values.number_of_members ?? null,
-          section: values.section || undefined,
+          section: values.section,
         }).unwrap();
         showSuccesToasts(toast, res, dict.lang, dict.teams.create.success, dict);
         reset();

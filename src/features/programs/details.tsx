@@ -9,7 +9,6 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import Loading from "@/app/[lang]/loading";
-import FileDropzone from "@/components/shared/FileDropzone";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { FormField } from "@/components/ui/form-field";
@@ -23,7 +22,6 @@ import { showErrorToasts, showSuccesToasts } from "@/lib/functions";
 import {
   useGetProgramQuery,
   usePartialUpdateProgramMutation,
-  useUploadProgramMediaMutation,
 } from "@/redux/features/programs/programsApiSlice";
 
 const schema = z.object({
@@ -45,20 +43,7 @@ export default function ProgramDetail({ dict }: { dict: Dict }) {
 
   const { data: program, isLoading } = useGetProgramQuery(uuid, { skip: !uuid });
   const [partialUpdate, { isLoading: isUpdating }] = usePartialUpdateProgramMutation();
-  const [uploadMedia] = useUploadProgramMediaMutation();
   const [readOnly, setReadOnly] = useState(true);
-
-  const handleMediaUpload = async (files: File[]) => {
-    if (!program?.uuid || files.length === 0) return;
-    const fd = new FormData();
-    fd.append("media_file", files[0]);
-    try {
-      await uploadMedia({ uuid: program.uuid, data: fd }).unwrap();
-      showSuccesToasts(toast, {}, dict.lang, dict.programs.upload.success, dict);
-    } catch (err) {
-      showErrorToasts(err, toast, dict.lang);
-    }
-  };
 
   const {
     register,
@@ -153,46 +138,27 @@ export default function ProgramDetail({ dict }: { dict: Dict }) {
         </Label>
       </form>
 
-      {program?.uuid && (
+      {program?.document && (
         <div className="space-y-3 pt-2">
-          <h2 className="text-xl font-semibold text-gray-800">{dict.programs.fields.media_file}</h2>
-          {program.media_file && (
-            <p className="text-sm">
-              <span className="text-[#585757]">{dict.programs.fields.current_file}: </span>
-              <a
-                href={program.media_file}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:underline break-all"
-              >
-                {program.media_file.split("/").pop() ?? program.media_file}
-              </a>
-            </p>
-          )}
-          {!readOnly && (
-            <FileDropzone
-              dropHint={dict.programs.upload.hint}
-              selectLabel={dict.programs.upload.select}
-              uploadLabel={dict.programs.upload.submit}
-              uploadingLabel={dict.programs.upload.uploading}
-              maxSizeLabel={(formatted) => `${dict.programs.upload.max_size}: ${formatted}`}
-              errorTooLarge={dict.programs.upload.too_large}
-              errorBadType={dict.programs.upload.bad_type}
-              onUpload={handleMediaUpload}
-            />
-          )}
+          <h2 className="text-xl font-semibold text-gray-800">{dict.programs.fields.document}</h2>
+          <p className="text-sm">
+            <span className="text-[#585757]">{dict.programs.fields.current_file}: </span>
+            <a
+              href={program.document}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:underline break-all"
+            >
+              {program.document.split("/").pop() ?? program.document}
+            </a>
+          </p>
         </div>
       )}
 
       {program?.uuid && (
         <div className="space-y-3 pt-4">
           <h2 className="text-xl font-semibold text-gray-800">{dict.sections.list.title}</h2>
-          <SectionsList
-            dict={dict}
-            programUuid={program.uuid}
-            defaultProgramYear={String(program.program_year)}
-            embedded
-          />
+          <SectionsList dict={dict} programUuid={program.uuid} embedded />
         </div>
       )}
     </section>

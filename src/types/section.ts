@@ -12,14 +12,13 @@ export interface Section {
   is_active?: boolean;
   name: string;
   description?: string | null;
-  program_year: string;
-  /** Program UUID. */
+  /** Program UUID. Required on write. */
   program?: string;
-  /** Président UUID. */
+  /** Président (User) UUID. Required on write. */
   president?: string;
-  /** Greffier en chef UUID. */
+  /** Greffier en chef (User) UUID. Required on write. */
   chief_clerk?: string;
-  /** Greffier UUID. */
+  /** Greffier (User) UUID. Required on write. */
   clerk?: string;
   created_at?: string;
   updated_at?: string;

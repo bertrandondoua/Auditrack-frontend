@@ -16,6 +16,16 @@ import { useGetProceduresQuery } from "@/redux/features/procedures/proceduresApi
 import { useGetStepsQuery } from "@/redux/features/steps/stepsApiSlice";
 import { useCreateTagMutation } from "@/redux/features/tags/tagsApiSlice";
 
+/**
+ * WRITE-CONTRACT AMBIGUITY (see BACKEND_MISMATCHES.md):
+ * The Tag serializer (openapi.json) marks `procedure`, `from_step`, `to_step`
+ * and `steps` as readOnly — only `duration` (+ `is_active`) are writable.
+ * That means the backend, as currently specified, may IGNORE the workflow
+ * edge fields below and only persist the duration. We keep collecting them
+ * because the readOnly flags look like a drf-yasg artefact (the model almost
+ * certainly stores these edges), but until the backend confirms writable
+ * source fields (e.g. `procedure_id`), tag creation may not wire up the graph.
+ */
 const schema = z
   .object({
     procedure: z.string().uuid(),

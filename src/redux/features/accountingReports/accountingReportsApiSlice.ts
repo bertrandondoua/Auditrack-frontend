@@ -9,7 +9,7 @@ interface ListAccountingReportsArgs {
   page?: number;
   organization?: string;
   section?: string;
-  fiscal_year?: string;
+  exercise_year?: number;
 }
 
 const accountingReportsApiSlice = api.injectEndpoints({

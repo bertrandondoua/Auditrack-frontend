@@ -23,7 +23,6 @@ import {
 const schema = z.object({
   name: z.string().min(1),
   description: z.string().optional().default(""),
-  program_year: z.string().regex(/^\d{4}$/),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -44,7 +43,7 @@ export default function SectionDetail({ dict }: { dict: Dict }) {
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
-    defaultValues: { name: "", description: "", program_year: String(new Date().getFullYear()) },
+    defaultValues: { name: "", description: "" },
   });
 
   useEffect(() => {
@@ -52,7 +51,6 @@ export default function SectionDetail({ dict }: { dict: Dict }) {
       reset({
         name: section.name ?? "",
         description: section.description ?? "",
-        program_year: section.program_year ?? "",
       });
     }
   }, [section, reset]);
@@ -65,7 +63,6 @@ export default function SectionDetail({ dict }: { dict: Dict }) {
         data: {
           name: values.name,
           description: values.description || null,
-          program_year: values.program_year,
         },
       }).unwrap();
       showSuccesToasts(toast, res, dict.lang, dict.sections.detail.modify_success, dict);
@@ -89,7 +86,7 @@ export default function SectionDetail({ dict }: { dict: Dict }) {
       <div className="flex items-start justify-between">
         <div>
           <h1 className="text-3xl font-bold text-gray-800">{section?.name ?? ""}</h1>
-          <p className="text-sm text-[#585757]">{section?.program_year ?? ""}</p>
+          <p className="text-sm text-[#585757]">{section?.description ?? ""}</p>
         </div>
         <Button
           isLoading={!readOnly && isUpdating}
@@ -120,15 +117,6 @@ export default function SectionDetail({ dict }: { dict: Dict }) {
           placeholder={dict.sections.fields.description_placeholder}
           inputProps={register("description")}
         />
-        <div className="grid grid-cols-2 gap-4">
-          <FormField
-            label={dict.sections.fields.program_year}
-            readOnly={readOnly}
-            placeholder={dict.sections.fields.program_year_placeholder}
-            error={errors.program_year?.message}
-            inputProps={register("program_year")}
-          />
-        </div>
       </form>
     </section>
   );

@@ -1,18 +1,16 @@
 /**
- * Auditrack — ProcedureStep (ordered join between a Procedure and a Step).
+ * Auditrack — ProcedureStep (join between a Procedure and a Step).
  *
- * greffe-webui used `[key: string]: any` for this entity. Inferred fields
- * from DRF naming conventions + the createProcedureStep call sites:
- * (procedure, step, order). Adjust if the backend serializer differs.
+ * Backend contract (openapi.json): only `step` + `procedure` are writable.
+ * There is no `order` field — the backend does not model step ordering here.
  */
 export interface ProcedureStep {
   uuid?: string;
   is_active?: boolean;
-  /** Procedure UUID. */
+  /** Procedure UUID. Required on write. */
   procedure: string;
-  /** Step UUID. */
+  /** Step UUID. Required on write. */
   step: string;
-  order: number;
   created_at?: string;
   updated_at?: string;
   created_by?: string | null;

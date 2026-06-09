@@ -44,7 +44,6 @@ export default function ProcedureStepsList({
   const { data, isLoading, isFetching } = useGetProcedureStepsQuery({
     page,
     procedure: effectiveProcedure,
-    ordering: "order",
   });
 
   const { data: proceduresData } = useGetProceduresQuery({ page: 1 });

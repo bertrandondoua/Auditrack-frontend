@@ -29,14 +29,6 @@ export function buildControlColumns({
 
   return [
     {
-      id: "name",
-      accessorKey: "name",
-      header: cols.name,
-      cell: ({ row }) => (
-        <div className="px-4 py-3 font-medium text-gray-900">{row.original.name ?? "—"}</div>
-      ),
-    },
-    {
       id: "organization",
       accessorKey: "organization",
       header: cols.organization,
@@ -45,7 +37,7 @@ export function buildControlColumns({
           ? orgByUuid.get(row.original.organization)
           : undefined;
         return (
-          <div className="px-4 py-3 text-gray-900">
+          <div className="px-4 py-3 font-medium text-gray-900">
             {org?.name ?? dict.controls.list.unknown_org}
           </div>
         );

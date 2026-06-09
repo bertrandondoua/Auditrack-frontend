@@ -36,17 +36,26 @@ export function buildAccountingReportColumns({
       header: cols.organization,
       cell: ({ row }) => (
         <div className="px-4 py-3 text-gray-900">
-          {orgByUuid.get(row.original.organization)?.name ??
+          {row.original.organization_details ??
+            orgByUuid.get(row.original.organization)?.name ??
             dict.accounting_reports.list.unknown_org}
         </div>
       ),
     },
     {
-      id: "fiscal_year",
-      accessorKey: "fiscal_year",
-      header: cols.fiscal_year,
+      id: "section",
+      accessorKey: "section",
+      header: cols.section,
       cell: ({ row }) => (
-        <div className="px-4 py-3 text-gray-700">{row.original.fiscal_year ?? "—"}</div>
+        <div className="px-4 py-3 text-gray-700">{row.original.section_details ?? "—"}</div>
+      ),
+    },
+    {
+      id: "exercise_year",
+      accessorKey: "exercise_year",
+      header: cols.exercise_year,
+      cell: ({ row }) => (
+        <div className="px-4 py-3 text-gray-700">{row.original.exercise_year ?? "—"}</div>
       ),
     },
     {

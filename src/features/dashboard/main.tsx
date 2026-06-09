@@ -156,10 +156,11 @@ export default function DashboardMain({ dict }: { dict: Dict }) {
                 >
                   <div>
                     <div className="font-medium text-gray-800">
-                      {orgByUuid.get(r.organization)?.name ?? "—"}
+                      {r.organization_details ?? orgByUuid.get(r.organization)?.name ?? "—"}
                     </div>
                     <div className="text-xs text-[#585757]">
-                      {r.fiscal_year ?? "—"} · {new Date(r.deposited_at).toLocaleDateString()}
+                      {r.exercise_year ?? "—"} ·{" "}
+                      {r.deposited_at ? new Date(r.deposited_at).toLocaleDateString() : "—"}
                     </div>
                   </div>
                   <span

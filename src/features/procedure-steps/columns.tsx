@@ -65,15 +65,6 @@ export function buildProcedureStepColumns({
   });
 
   columns.push({
-    id: "order",
-    accessorKey: "order",
-    header: cols.order,
-    cell: ({ row }) => (
-      <div className="px-4 py-3 text-gray-700 font-mono">{row.original.order}</div>
-    ),
-  });
-
-  columns.push({
     id: "actions",
     header: cols.actions,
     cell: ({ row }) =>

@@ -308,7 +308,6 @@
       "columns": {
         "procedure": "Procedure",
         "step": "Step",
-        "order": "Order",
         "actions": "Actions"
       }
     },
@@ -321,9 +320,7 @@
       "procedure": "Procedure",
       "procedure_placeholder": "Select a procedure",
       "step": "Step",
-      "step_placeholder": "Select a step",
-      "order": "Order",
-      "order_placeholder": "1"
+      "step_placeholder": "Select a step"
     }
   },
   "accounting_reports": {
@@ -338,7 +335,8 @@
       "validate_success": "Report validated successfully",
       "columns": {
         "organization": "Organisation",
-        "fiscal_year": "Fiscal year",
+        "section": "Section",
+        "exercise_year": "Fiscal year",
         "deposited_at": "Deposited at",
         "status": "Status",
         "actions": "Actions"
@@ -357,8 +355,10 @@
     "fields": {
       "organization": "Organisation",
       "organization_placeholder": "Select an organisation",
-      "fiscal_year": "Fiscal year",
-      "fiscal_year_placeholder": "e.g. 2026",
+      "section": "Section",
+      "section_placeholder": "Select a section",
+      "exercise_year": "Fiscal year",
+      "exercise_year_placeholder": "e.g. 2026",
       "deposited_at": "Deposit date",
       "deposited_by": "Deposited by (UUID)",
       "deposited_by_placeholder": "UUID (optional)",
@@ -401,7 +401,6 @@
       "status_filter_placeholder": "Status",
       "unknown_org": "Unknown organisation",
       "columns": {
-        "name": "Name",
         "organization": "Organisation",
         "exercise_year": "Exercise",
         "status": "Status",
@@ -419,10 +418,6 @@
       "success": "Control created successfully"
     },
     "fields": {
-      "name": "Name",
-      "name_placeholder": "Control name (optional)",
-      "description": "Description",
-      "description_placeholder": "Description",
       "organization": "Organisation",
       "organization_placeholder": "Select an organisation",
       "section": "Section",
@@ -430,9 +425,7 @@
       "procedure": "Procedure",
       "procedure_placeholder": "Select a procedure",
       "exercise_year": "Exercise",
-      "exercise_year_placeholder": "2026",
-      "loc": "Location",
-      "loc_placeholder": "Control location"
+      "exercise_year_placeholder": "2026"
     },
     "detail": {
       "back": "Back to controls",
@@ -453,9 +446,8 @@
       "next_step_placeholder": "Select",
       "no_steps": "No steps recorded for this control yet.",
       "unknown_step": "Unknown step",
-      "completed_at": "Completed at",
       "complete_step": "Mark as completed",
-      "reopen_step": "Reopen",
+      "complete_step_success": "Step marked as completed",
       "upload_hint": "Drop a document here or click to browse",
       "upload_select": "Browse",
       "upload_submit": "Upload",
@@ -576,7 +568,7 @@
       "search_placeholder": "Search a section",
       "columns": {
         "name": "Name",
-        "program_year": "Year",
+        "description": "Description",
         "status": "Status",
         "actions": "Actions"
       }
@@ -684,18 +676,8 @@
       "year": "Year",
       "year_placeholder": "2026",
       "is_active": "Active programme",
-      "media_file": "Media file",
+      "document": "Document",
       "current_file": "Current file"
-    },
-    "upload": {
-      "hint": "Drop a media file here",
-      "select": "Browse",
-      "submit": "Upload",
-      "uploading": "Uploading...",
-      "max_size": "Max size",
-      "too_large": "File too large",
-      "bad_type": "Unsupported file type",
-      "success": "File uploaded successfully"
     },
     "status": {
       "active": "Active",
