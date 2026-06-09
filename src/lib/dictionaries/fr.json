@@ -147,11 +147,18 @@
       "email_placeholder": "user@example.cm",
       "phone": "Téléphone",
       "phone_placeholder": "6XX XXX XXX",
-      "position": "Fonction",
-      "position_placeholder": "Fonction",
+      "gender": "Genre",
+      "gender_placeholder": "Sélectionner",
       "role": "Rôle",
       "role_placeholder": "Sélectionner un rôle"
     },
+    "roles": {
+      "clerk": "Greffier",
+      "chief_clerk": "Greffier en chef",
+      "president": "Président de section",
+      "it_manager": "Responsable informatique"
+    },
+    "genders": { "M": "Masculin", "F": "Féminin" },
     "status": { "active": "Actif", "inactive": "Inactif" }
   },
   "permissions": {

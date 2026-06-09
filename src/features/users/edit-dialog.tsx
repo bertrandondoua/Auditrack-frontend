@@ -20,7 +20,13 @@ import { showErrorToasts, showSuccesToasts } from "@/lib/functions";
 import { usePartialUpdateUserMutation } from "@/redux/features/users/usersApiSlice";
 import type { User } from "@/types/user";
 
-import { ROLE_OPTIONS, normalizePhone, userSchema, type UserFormValues } from "./schema";
+import {
+  genderOptions,
+  normalizePhone,
+  roleOptions,
+  userSchema,
+  type UserFormValues,
+} from "./schema";
 
 export interface EditUserDialogProps {
   dict: Dict;
@@ -47,8 +53,8 @@ export default function EditUserDialog({ dict, user, open, onOpenChange }: EditU
       last_name: "",
       email: "",
       phone_number: "",
-      position: "",
       role: "clerk",
+      gender: "",
     },
   });
 
@@ -59,8 +65,8 @@ export default function EditUserDialog({ dict, user, open, onOpenChange }: EditU
         last_name: user.last_name ?? "",
         email: user.email,
         phone_number: user.phone_number ?? "",
-        position: user.position ?? "",
         role: (user.role ?? "clerk") as UserFormValues["role"],
+        gender: user.gender ?? "",
       });
     }
   }, [user, reset]);
@@ -74,9 +80,9 @@ export default function EditUserDialog({ dict, user, open, onOpenChange }: EditU
           first_name: values.first_name,
           last_name: values.last_name,
           email: values.email,
-          phone_number: normalizePhone(values.phone_number ?? ""),
-          position: values.position,
+          phone_number: normalizePhone(values.phone_number),
           role: values.role,
+          gender: values.gender || null,
         },
       }).unwrap();
       showSuccesToasts(toast, res, dict.lang, dict.users.edit.success, dict);
@@ -114,16 +120,27 @@ export default function EditUserDialog({ dict, user, open, onOpenChange }: EditU
             error={errors.email?.message}
             inputProps={register("email")}
           />
-          <FormField
-            label={f.phone}
-            placeholder={f.phone_placeholder}
-            inputProps={register("phone_number")}
-          />
-          <FormField
-            label={f.position}
-            placeholder={f.position_placeholder}
-            inputProps={register("position")}
-          />
+          <div className="grid grid-cols-2 gap-4">
+            <FormField
+              label={f.phone}
+              placeholder={f.phone_placeholder}
+              error={errors.phone_number?.message}
+              inputProps={register("phone_number")}
+            />
+            <Controller
+              control={control}
+              name="gender"
+              render={({ field }) => (
+                <CustomSelect
+                  label={f.gender}
+                  placeholder={f.gender_placeholder}
+                  value={field.value ?? ""}
+                  onChange={field.onChange}
+                  options={genderOptions(dict)}
+                />
+              )}
+            />
+          </div>
           <Controller
             control={control}
             name="role"
@@ -133,7 +150,7 @@ export default function EditUserDialog({ dict, user, open, onOpenChange }: EditU
                 placeholder={f.role_placeholder}
                 value={field.value}
                 onChange={(v) => field.onChange(v as UserFormValues["role"])}
-                options={ROLE_OPTIONS}
+                options={roleOptions(dict)}
               />
             )}
           />

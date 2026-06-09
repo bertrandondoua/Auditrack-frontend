@@ -49,11 +49,14 @@ export function buildUserColumns({
       id: "role",
       accessorKey: "role",
       header: cols.role,
-      cell: ({ row }) => (
-        <span className="text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded border border-[#126D4E] text-[#126D4E]">
-          {row.original.role ?? "—"}
-        </span>
-      ),
+      cell: ({ row }) => {
+        const role = row.original.role;
+        return (
+          <span className="text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded border border-[#126D4E] text-[#126D4E]">
+            {role ? (dict.users.roles[role] ?? role) : "—"}
+          </span>
+        );
+      },
     },
     {
       id: "status",

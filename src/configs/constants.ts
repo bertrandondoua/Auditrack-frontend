@@ -10,13 +10,8 @@ import {
 import Logout from "@/components/shared/Layout/icons/Logout";
 import type { Routes, SelectOption } from "@/lib/types";
 
-const ALL_ROLES = [
-  "clerk",
-  "chief_clerk",
-  "section_president",
-  "magistrate",
-  "attorney_general",
-] as const;
+// Backend roles (openapi.json): clerk | chief_clerk | president | it_manager.
+const ALL_ROLES = ["clerk", "chief_clerk", "president"] as const;
 
 const ALL_ROLES_WITH_IT = [...ALL_ROLES, "it_manager"] as const;
 

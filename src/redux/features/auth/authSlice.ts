@@ -1,13 +1,8 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "@/redux/store";
 
-export type Role =
-  | "clerk"
-  | "chief_clerk"
-  | "section_president"
-  | "magistrate"
-  | "attorney_general"
-  | "it_manager";
+// Mirrors the backend `accounts.User.role` enum (openapi.json).
+export type Role = "clerk" | "chief_clerk" | "president" | "it_manager";
 
 import type { User } from "@/types/user";
 

@@ -13,7 +13,13 @@ import type { Dict } from "@/lib/dictionaries";
 import { showErrorToasts, showSuccesToasts } from "@/lib/functions";
 import { useCreateUserMutation } from "@/redux/features/users/usersApiSlice";
 
-import { ROLE_OPTIONS, normalizePhone, userSchema, type UserFormValues } from "./schema";
+import {
+  genderOptions,
+  normalizePhone,
+  roleOptions,
+  userSchema,
+  type UserFormValues,
+} from "./schema";
 
 export default function CreateUserDialog({ dict }: { dict: Dict }) {
   const { toast } = useToast();
@@ -33,8 +39,8 @@ export default function CreateUserDialog({ dict }: { dict: Dict }) {
       last_name: "",
       email: "",
       phone_number: "",
-      position: "",
       role: "clerk",
+      gender: "",
     },
   });
 
@@ -45,9 +51,9 @@ export default function CreateUserDialog({ dict }: { dict: Dict }) {
           first_name: values.first_name,
           last_name: values.last_name,
           email: values.email,
-          phone_number: normalizePhone(values.phone_number ?? ""),
-          position: values.position,
+          phone_number: normalizePhone(values.phone_number),
           role: values.role,
+          ...(values.gender ? { gender: values.gender } : {}),
         }).unwrap();
         showSuccesToasts(toast, res, dict.lang, dict.users.create.success, dict);
         reset();
@@ -98,16 +104,27 @@ export default function CreateUserDialog({ dict }: { dict: Dict }) {
           error={errors.email?.message}
           inputProps={register("email")}
         />
-        <FormField
-          label={f.phone}
-          placeholder={f.phone_placeholder}
-          inputProps={register("phone_number")}
-        />
-        <FormField
-          label={f.position}
-          placeholder={f.position_placeholder}
-          inputProps={register("position")}
-        />
+        <div className="grid grid-cols-2 gap-4">
+          <FormField
+            label={f.phone}
+            placeholder={f.phone_placeholder}
+            error={errors.phone_number?.message}
+            inputProps={register("phone_number")}
+          />
+          <Controller
+            control={control}
+            name="gender"
+            render={({ field }) => (
+              <CustomSelect
+                label={f.gender}
+                placeholder={f.gender_placeholder}
+                value={field.value ?? ""}
+                onChange={field.onChange}
+                options={genderOptions(dict)}
+              />
+            )}
+          />
+        </div>
         <Controller
           control={control}
           name="role"
@@ -117,7 +134,7 @@ export default function CreateUserDialog({ dict }: { dict: Dict }) {
               placeholder={f.role_placeholder}
               value={field.value}
               onChange={(v) => field.onChange(v as UserFormValues["role"])}
-              options={ROLE_OPTIONS}
+              options={roleOptions(dict)}
             />
           )}
         />
