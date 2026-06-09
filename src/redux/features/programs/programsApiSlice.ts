@@ -33,11 +33,6 @@ const programsApiSlice = api.injectEndpoints({
       providesTags: (_result, _error, uuid) => [{ type: "Program", id: uuid }],
     }),
 
-    /**
-     * NOTE: greffe-webui's createProgram uses FormData to support a
-     * media_file upload. The MVP port sends JSON only; add a separate
-     * uploadProgramMedia mutation when file upload is wired up.
-     */
     createProgram: builder.mutation<Program, Partial<Program>>({
       query: (data) => ({
         url: "/core/programs/",
@@ -75,19 +70,6 @@ const programsApiSlice = api.injectEndpoints({
         { type: "Program", id: "LIST" },
       ],
     }),
-
-    /**
-     * Multipart PATCH for the `media_file` field. The caller MUST pass a
-     * FormData with the file under the key `media_file`.
-     */
-    uploadProgramMedia: builder.mutation<Program, { uuid: string; data: FormData }>({
-      query: ({ uuid, data }) => ({
-        url: `/core/programs/${uuid}/`,
-        method: "PATCH",
-        body: data,
-      }),
-      invalidatesTags: (_result, _error, { uuid }) => [{ type: "Program", id: uuid }],
-    }),
   }),
 });
 
@@ -98,5 +80,4 @@ export const {
   useUpdateProgramMutation,
   usePartialUpdateProgramMutation,
   useDeleteProgramMutation,
-  useUploadProgramMediaMutation,
 } = programsApiSlice;

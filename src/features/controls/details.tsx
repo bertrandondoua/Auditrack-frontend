@@ -136,14 +136,14 @@ export default function ControlDetail({ dict }: { dict: Dict }) {
   };
 
   /**
-   * NOTE: backend exposes `complete_step/` but no `reopen_step/`.
-   * See BACKEND_MISMATCHES.md §2. The completed checkbox is one-way until
-   * the reopen action lands server-side.
+   * NOTE: backend exposes `complete_step/` but the ControlStep serializer
+   * has no completion field, so the action is one-way and its result is not
+   * reflected in the row. See BACKEND_MISMATCHES.md §2.
    */
-  const handleToggleStep = async (csUuid: string, completed: boolean) => {
-    if (completed) return; // backend can't reopen; ignore the click
+  const handleCompleteStep = async (csUuid: string) => {
     try {
       await completeControlStep({ uuid: csUuid }).unwrap();
+      showSuccesToasts(toast, {}, dict.lang, dict.controls.detail.complete_step_success, dict);
     } catch (err) {
       showErrorToasts(err, toast, dict.lang);
     }
@@ -180,7 +180,7 @@ export default function ControlDetail({ dict }: { dict: Dict }) {
       <div className="flex items-start justify-between">
         <div className="space-y-2">
           <div className="flex items-center gap-3">
-            <h1 className="text-3xl font-bold text-gray-800">{control?.name ?? procedureName}</h1>
+            <h1 className="text-3xl font-bold text-gray-800">{procedureName}</h1>
             <span
               className={`text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded border ${STATUS_CLASSES[status]}`}
             >
@@ -231,10 +231,6 @@ export default function ControlDetail({ dict }: { dict: Dict }) {
           )}
         </div>
       </div>
-
-      {control?.description && (
-        <p className="text-sm text-gray-700 max-w-prose">{control.description}</p>
-      )}
 
       <div className="space-y-3">
         <div className="flex items-center justify-between">
@@ -288,10 +284,9 @@ export default function ControlDetail({ dict }: { dict: Dict }) {
                 csUuid={cs.uuid}
                 stepName={cs.step ? (stepByUuid.get(cs.step)?.name ?? null) : null}
                 recordedAt={cs.recorded_at ?? cs.created_at}
-                completedAt={cs.completed_at}
                 controlOpened={status === "opened"}
                 dict={dict}
-                onToggle={handleToggleStep}
+                onComplete={handleCompleteStep}
                 onUpload={handleStepUpload}
               />
             ))}

@@ -4,6 +4,21 @@ import type { AuthToken, SendOtpRequest, User } from "@/types/user";
 const clientId = process.env.NEXT_PUBLIC_CLIENT_ID;
 const clientSecret = process.env.NEXT_PUBLIC_CLIENT_SECRET;
 
+/**
+ * Public auth config from `GET /accounts/auth/config/` (unauthenticated).
+ * Lets the signin flow decide at runtime whether to require an OTP step,
+ * instead of hardcoding it. See the API spec — OTP is ON by default.
+ */
+export interface AuthConfig {
+  login_require_otp: boolean;
+  otp?: {
+    channel?: string;
+    length?: number;
+    ttl_seconds?: number;
+    max_attempts?: number;
+  };
+}
+
 interface LoginArgs {
   username: string;
   password: string;
@@ -25,6 +40,10 @@ interface ChangePasswordArgs {
 
 const authApiSlice = api.injectEndpoints({
   endpoints: (builder) => ({
+    getAuthConfig: builder.query<AuthConfig, void>({
+      query: () => "/accounts/auth/config/",
+    }),
+
     login: builder.mutation<AuthToken, LoginArgs>({
       query: (body) => {
         const params: Record<string, string> = {
@@ -92,6 +111,8 @@ const authApiSlice = api.injectEndpoints({
 });
 
 export const {
+  useGetAuthConfigQuery,
+  useLazyGetAuthConfigQuery,
   useChangePasswordMutation,
   useLoginMutation,
   useLogoutUserMutation,

@@ -30,10 +30,14 @@ export function buildSectionColumns({
       ),
     },
     {
-      id: "program_year",
-      accessorKey: "program_year",
-      header: cols.program_year,
-      cell: ({ row }) => <div className="px-4 py-3 text-gray-700">{row.original.program_year}</div>,
+      id: "description",
+      accessorKey: "description",
+      header: cols.description,
+      cell: ({ row }) => (
+        <div className="px-4 py-3 text-gray-700 max-w-md truncate">
+          {row.original.description || "—"}
+        </div>
+      ),
     },
     {
       id: "status",

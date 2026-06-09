@@ -8,7 +8,6 @@ import { z } from "zod";
 import ReusableDialog from "@/components/shared/dialog";
 import { CustomSelect } from "@/components/shared/select";
 import { Button } from "@/components/ui/button";
-import { FormField } from "@/components/ui/form-field";
 import { useToast } from "@/hooks/use-toast";
 import type { Dict } from "@/lib/dictionaries";
 import { showErrorToasts, showSuccesToasts } from "@/lib/functions";
@@ -19,10 +18,6 @@ import { useGetStepsQuery } from "@/redux/features/steps/stepsApiSlice";
 const schema = z.object({
   procedure: z.string().uuid(),
   step: z.string().uuid(),
-  order: z
-    .union([z.string(), z.number()])
-    .transform((v) => Number(v))
-    .refine((n) => Number.isInteger(n) && n >= 1, { message: "Order must be ≥ 1" }),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -52,14 +47,13 @@ export default function CreateProcedureStepDialog({
     .map((s) => ({ value: s.uuid!, label: s.name }));
 
   const {
-    register,
     handleSubmit,
     reset,
     control,
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
-    defaultValues: { procedure: lockedProcedureUuid ?? "", step: "", order: 1 },
+    defaultValues: { procedure: lockedProcedureUuid ?? "", step: "" },
   });
 
   const submit = (closeDialog: () => void) =>
@@ -67,7 +61,7 @@ export default function CreateProcedureStepDialog({
       try {
         const res = await createProcedureStep(values).unwrap();
         showSuccesToasts(toast, res, dict.lang, dict.procedure_steps.create.success, dict);
-        reset({ procedure: lockedProcedureUuid ?? "", step: "", order: 1 });
+        reset({ procedure: lockedProcedureUuid ?? "", step: "" });
         closeDialog();
       } catch (err) {
         showErrorToasts(err, toast, dict.lang);
@@ -120,14 +114,6 @@ export default function CreateProcedureStepDialog({
               options={stepOptions}
             />
           )}
-        />
-        <FormField
-          label={f.order}
-          type="number"
-          inputMode="numeric"
-          placeholder={f.order_placeholder}
-          error={errors.order?.message}
-          inputProps={register("order")}
         />
         {Object.keys(errors).length > 0 && (
           <p className="text-sm text-destructive">

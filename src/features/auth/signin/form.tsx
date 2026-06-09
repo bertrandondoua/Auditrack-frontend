@@ -15,7 +15,11 @@ import { Button } from "@/components/ui/button";
 import { FormField } from "@/components/ui/form-field";
 import { useToast } from "@/hooks/use-toast";
 import { showErrorToasts, showSuccesToasts } from "@/lib/functions";
-import { useLoginMutation } from "@/redux/features/auth/authApiSlice";
+import {
+  useGetAuthConfigQuery,
+  useLoginMutation,
+  useSendOtpMutation,
+} from "@/redux/features/auth/authApiSlice";
 
 const schema = z.object({
   username: z.string().email(),
@@ -28,7 +32,16 @@ export default function LoginForm({ dict }: Readonly<{ dict: Dict }>) {
   const { toast } = useToast();
   const router = useRouter();
   const [visible, setVisible] = useState(false);
-  const [login, { isLoading }] = useLoginMutation();
+  const [login, { isLoading: loggingIn }] = useLoginMutation();
+  const [sendOtp, { isLoading: sendingOtp }] = useSendOtpMutation();
+
+  // Public config — tells us at runtime whether this backend requires an OTP.
+  // Defaults to the OTP flow if the config can't be read, since OTP is the
+  // backend's default (safer to ask for a code than to send a doomed grant).
+  const { data: authConfig } = useGetAuthConfigQuery();
+  const requireOtp = authConfig?.login_require_otp ?? true;
+
+  const isLoading = loggingIn || sendingOtp;
 
   const {
     register,
@@ -36,13 +49,7 @@ export default function LoginForm({ dict }: Readonly<{ dict: Dict }>) {
     formState: { errors },
   } = useForm<FormValues>({ resolver: zodResolver(schema) });
 
-  /**
-   * NOTE: Auditrack-api dropped the OTP step from the signin flow. This form
-   * now does the OAuth2 password grant directly. If OTP returns, route the
-   * UX back through /verification — the underlying useLoginMutation already
-   * accepts an optional `otp` field.
-   */
-  const onSubmit = handleSubmit(async (values) => {
+  const clearAuthKeys = () => {
     Cookies.remove("token");
     if (typeof window !== "undefined") {
       // Surgical clear — preserve locale prefs, etc. Only auth keys.
@@ -50,12 +57,27 @@ export default function LoginForm({ dict }: Readonly<{ dict: Dict }>) {
       window.localStorage.removeItem("user");
       window.localStorage.removeItem("userCredentials");
     }
+  };
+
+  const onSubmit = handleSubmit(async (values) => {
+    clearAuthKeys();
     try {
+      if (requireOtp) {
+        // OTP flow: request a code, stash creds, hand off to /verification
+        // which finishes the token exchange with the entered code.
+        await sendOtp({ email: values.username }).unwrap();
+        window.localStorage.setItem(
+          "userCredentials",
+          JSON.stringify({ username: values.username, password: values.password }),
+        );
+        router.push("verification");
+        return;
+      }
+      // No OTP — straight OAuth2 password grant.
       const res = await login({
         username: values.username,
         password: values.password,
       }).unwrap();
-      // login mutation's onQueryStarted already persists tokens + cookie.
       showSuccesToasts(toast, res, dict.lang, dict.signin.login_Success, dict);
       router.push("dashboard");
     } catch (err) {

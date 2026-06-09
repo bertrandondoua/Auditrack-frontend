@@ -26,16 +26,10 @@ export interface SectionsListProps {
   dict: Dict;
   /** When set, scopes the list to a single program and pre-fills the create dialog. */
   programUuid?: string;
-  defaultProgramYear?: string;
   embedded?: boolean;
 }
 
-export default function SectionsList({
-  dict,
-  programUuid,
-  defaultProgramYear,
-  embedded,
-}: SectionsListProps) {
+export default function SectionsList({ dict, programUuid, embedded }: SectionsListProps) {
   const { toast } = useToast();
   const router = useRouter();
   const { lang } = useParams<{ lang: Locale }>();
@@ -94,11 +88,7 @@ export default function SectionsList({
               {total} {dict.sections.list.subtitle}
             </p>
           </div>
-          <CreateSectionDialog
-            dict={dict}
-            lockedProgramUuid={programUuid}
-            defaultProgramYear={defaultProgramYear}
-          />
+          <CreateSectionDialog dict={dict} lockedProgramUuid={programUuid} />
         </div>
       )}
       {embedded && (
@@ -106,11 +96,7 @@ export default function SectionsList({
           <p className="text-sm text-[#585757]">
             {total} {dict.sections.list.subtitle}
           </p>
-          <CreateSectionDialog
-            dict={dict}
-            lockedProgramUuid={programUuid}
-            defaultProgramYear={defaultProgramYear}
-          />
+          <CreateSectionDialog dict={dict} lockedProgramUuid={programUuid} />
         </div>
       )}
 

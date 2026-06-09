@@ -9,16 +9,14 @@
 export interface ControlStep {
   uuid?: string;
   is_active?: boolean;
-  /** Control UUID. */
+  /** Control UUID. Required on write. */
   control: string;
-  /** Step UUID. */
+  /** Step UUID. Required on write. */
   step: string;
-  /** Phase UUID. */
-  phase?: string;
-  /** ISO datetime when this step was recorded as started. */
+  /** ISO datetime when this step was recorded. Backend has no `completed_at`. */
   recorded_at?: string;
-  /** ISO datetime when the step was completed (server-set on completion). */
-  completed_at?: string | null;
+  /** UUIDs of documents attached to this control step. */
+  documents?: string[];
   created_at?: string;
   updated_at?: string;
   created_by?: string | null;

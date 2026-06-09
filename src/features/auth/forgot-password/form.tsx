@@ -14,7 +14,11 @@ import { Button } from "@/components/ui/button";
 import { FormField } from "@/components/ui/form-field";
 import { useToast } from "@/hooks/use-toast";
 import { showErrorToasts, showSuccesToasts } from "@/lib/functions";
-import { useResetPasswordMutation } from "@/redux/features/auth/authApiSlice";
+import {
+  useGetAuthConfigQuery,
+  useResetPasswordMutation,
+  useSendOtpMutation,
+} from "@/redux/features/auth/authApiSlice";
 
 const schema = z.object({
   email: z.string().email(),
@@ -29,7 +33,13 @@ export default function ForgotPasswordForm({ dict }: Readonly<{ dict: Dict }>) {
   const signinHref = `/${lang}/signin`;
   const { toast } = useToast();
   const [visible, setVisible] = useState(false);
-  const [resetPassword, { isLoading }] = useResetPasswordMutation();
+  const [resetPassword, { isLoading: resetting }] = useResetPasswordMutation();
+  const [sendOtp, { isLoading: sendingOtp }] = useSendOtpMutation();
+
+  // Same runtime config as signin — reset requires an OTP when login does.
+  const { data: authConfig } = useGetAuthConfigQuery();
+  const requireOtp = authConfig?.login_require_otp ?? true;
+  const isLoading = resetting || sendingOtp;
 
   const {
     register,
@@ -37,12 +47,6 @@ export default function ForgotPasswordForm({ dict }: Readonly<{ dict: Dict }>) {
     formState: { errors },
   } = useForm<FormValues>({ resolver: zodResolver(schema) });
 
-  /**
-   * NOTE: Auditrack-api dropped the OTP step. Reset now does a direct POST
-   * to /accounts/users/reset_password/ with email + new password. If OTP
-   * returns, route back through /verification — the resetPassword mutation
-   * already accepts an optional `otp` field.
-   */
   const onSubmit = handleSubmit(async (values) => {
     Cookies.remove("token");
     if (typeof window !== "undefined") {
@@ -53,6 +57,17 @@ export default function ForgotPasswordForm({ dict }: Readonly<{ dict: Dict }>) {
       window.localStorage.removeItem("userResseteCredentials");
     }
     try {
+      if (requireOtp) {
+        // Request a code, stash the reset payload, hand off to /verification
+        // which completes the reset with the entered OTP.
+        await sendOtp({ email: values.email }).unwrap();
+        window.localStorage.setItem(
+          "userResseteCredentials",
+          JSON.stringify({ email: values.email, password: values.password }),
+        );
+        router.push("verification");
+        return;
+      }
       const res = await resetPassword({
         email: values.email,
         password: values.password,

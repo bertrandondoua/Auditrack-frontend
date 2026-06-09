@@ -15,14 +15,15 @@ import { showErrorToasts, showSuccesToasts } from "@/lib/functions";
 import { useGetProgramsQuery } from "@/redux/features/programs/programsApiSlice";
 import { useCreateSectionMutation } from "@/redux/features/sections/sectionsApiSlice";
 
+// Backend requires program + clerk + chief_clerk + president (all UUIDs).
+// There is no `program_year` field on Section — the year lives on the Program.
 const schema = z.object({
   name: z.string().min(1),
   description: z.string().optional().default(""),
-  program_year: z.string().regex(/^\d{4}$/),
-  program: z.string().uuid().optional().or(z.literal("")),
-  president: z.string().uuid().optional().or(z.literal("")),
-  chief_clerk: z.string().uuid().optional().or(z.literal("")),
-  clerk: z.string().uuid().optional().or(z.literal("")),
+  program: z.string().uuid(),
+  president: z.string().uuid(),
+  chief_clerk: z.string().uuid(),
+  clerk: z.string().uuid(),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -31,14 +32,9 @@ export interface CreateSectionDialogProps {
   dict: Dict;
   /** When set, the program dropdown is locked and pre-filled. */
   lockedProgramUuid?: string;
-  defaultProgramYear?: string;
 }
 
-export default function CreateSectionDialog({
-  dict,
-  lockedProgramUuid,
-  defaultProgramYear,
-}: CreateSectionDialogProps) {
+export default function CreateSectionDialog({ dict, lockedProgramUuid }: CreateSectionDialogProps) {
   const { toast } = useToast();
   const [createSection, { isLoading }] = useCreateSectionMutation();
   const f = dict.sections.fields;
@@ -48,7 +44,14 @@ export default function CreateSectionDialog({
     .filter((p) => p.uuid)
     .map((p) => ({ value: p.uuid!, label: String(p.program_year) }));
 
-  const currentYear = new Date().getFullYear();
+  const blankValues: FormValues = {
+    name: "",
+    description: "",
+    program: lockedProgramUuid ?? "",
+    president: "",
+    chief_clerk: "",
+    clerk: "",
+  };
 
   const {
     register,
@@ -58,15 +61,7 @@ export default function CreateSectionDialog({
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
-    defaultValues: {
-      name: "",
-      description: "",
-      program_year: defaultProgramYear ?? String(currentYear),
-      program: lockedProgramUuid ?? "",
-      president: "",
-      chief_clerk: "",
-      clerk: "",
-    },
+    defaultValues: blankValues,
   });
 
   const submit = (closeDialog: () => void) =>
@@ -75,22 +70,13 @@ export default function CreateSectionDialog({
         const res = await createSection({
           name: values.name,
           description: values.description || null,
-          program_year: values.program_year,
-          program: values.program || undefined,
-          president: values.president || undefined,
-          chief_clerk: values.chief_clerk || undefined,
-          clerk: values.clerk || undefined,
+          program: values.program,
+          president: values.president,
+          chief_clerk: values.chief_clerk,
+          clerk: values.clerk,
         }).unwrap();
         showSuccesToasts(toast, res, dict.lang, dict.sections.create.success, dict);
-        reset({
-          name: "",
-          description: "",
-          program_year: defaultProgramYear ?? String(currentYear),
-          program: lockedProgramUuid ?? "",
-          president: "",
-          chief_clerk: "",
-          clerk: "",
-        });
+        reset(blankValues);
         closeDialog();
       } catch (err) {
         showErrorToasts(err, toast, dict.lang);
@@ -133,42 +119,37 @@ export default function CreateSectionDialog({
           placeholder={f.description_placeholder}
           inputProps={register("description")}
         />
-        <div className="grid grid-cols-2 gap-4">
-          <Controller
-            control={control}
-            name="program"
-            render={({ field }) => (
-              <CustomSelect
-                label={f.program}
-                placeholder={f.program_placeholder}
-                value={field.value}
-                onChange={field.onChange}
-                readOnly={!!lockedProgramUuid}
-                options={programOptions}
-              />
-            )}
-          />
-          <FormField
-            label={f.program_year}
-            placeholder={f.program_year_placeholder}
-            error={errors.program_year?.message}
-            inputProps={register("program_year")}
-          />
-        </div>
+        <Controller
+          control={control}
+          name="program"
+          render={({ field }) => (
+            <CustomSelect
+              label={f.program}
+              placeholder={f.program_placeholder}
+              value={field.value}
+              onChange={field.onChange}
+              readOnly={!!lockedProgramUuid}
+              options={programOptions}
+            />
+          )}
+        />
         <div className="grid grid-cols-3 gap-4">
           <FormField
             label={f.president}
             placeholder={f.president_placeholder}
+            error={errors.president?.message}
             inputProps={register("president")}
           />
           <FormField
             label={f.chief_clerk}
             placeholder={f.chief_clerk_placeholder}
+            error={errors.chief_clerk?.message}
             inputProps={register("chief_clerk")}
           />
           <FormField
             label={f.clerk}
             placeholder={f.clerk_placeholder}
+            error={errors.clerk?.message}
             inputProps={register("clerk")}
           />
         </div>

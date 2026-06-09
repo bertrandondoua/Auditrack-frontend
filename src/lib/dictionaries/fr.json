@@ -324,7 +324,6 @@
       "columns": {
         "procedure": "Procédure",
         "step": "Étape",
-        "order": "Ordre",
         "actions": "Actions"
       }
     },
@@ -337,9 +336,7 @@
       "procedure": "Procédure",
       "procedure_placeholder": "Sélectionner une procédure",
       "step": "Étape",
-      "step_placeholder": "Sélectionner une étape",
-      "order": "Ordre",
-      "order_placeholder": "1"
+      "step_placeholder": "Sélectionner une étape"
     }
   },
   "accounting_reports": {
@@ -354,7 +351,8 @@
       "validate_success": "Rapport validé avec succès",
       "columns": {
         "organization": "Organisme",
-        "fiscal_year": "Exercice",
+        "section": "Section",
+        "exercise_year": "Exercice",
         "deposited_at": "Date de dépôt",
         "status": "Statut",
         "actions": "Actions"
@@ -373,8 +371,10 @@
     "fields": {
       "organization": "Organisme",
       "organization_placeholder": "Sélectionner un organisme",
-      "fiscal_year": "Exercice",
-      "fiscal_year_placeholder": "Ex: 2026",
+      "section": "Section",
+      "section_placeholder": "Sélectionner une section",
+      "exercise_year": "Exercice",
+      "exercise_year_placeholder": "Ex: 2026",
       "deposited_at": "Date de dépôt",
       "deposited_by": "Déposé par (UUID)",
       "deposited_by_placeholder": "UUID (optionnel)",
@@ -417,7 +417,6 @@
       "status_filter_placeholder": "Statut",
       "unknown_org": "Organisme inconnu",
       "columns": {
-        "name": "Nom",
         "organization": "Organisme",
         "exercise_year": "Exercice",
         "status": "Statut",
@@ -435,10 +434,6 @@
       "success": "Contrôle créé avec succès"
     },
     "fields": {
-      "name": "Nom",
-      "name_placeholder": "Nom du contrôle (optionnel)",
-      "description": "Description",
-      "description_placeholder": "Description",
       "organization": "Organisme",
       "organization_placeholder": "Sélectionner un organisme",
       "section": "Section",
@@ -446,9 +441,7 @@
       "procedure": "Procédure",
       "procedure_placeholder": "Sélectionner une procédure",
       "exercise_year": "Exercice",
-      "exercise_year_placeholder": "2026",
-      "loc": "Lieu",
-      "loc_placeholder": "Lieu du contrôle"
+      "exercise_year_placeholder": "2026"
     },
     "detail": {
       "back": "Retour aux contrôles",
@@ -469,9 +462,8 @@
       "next_step_placeholder": "Sélectionner",
       "no_steps": "Aucune étape enregistrée pour ce contrôle.",
       "unknown_step": "Étape inconnue",
-      "completed_at": "Clôturée le",
       "complete_step": "Marquer comme terminée",
-      "reopen_step": "Rouvrir",
+      "complete_step_success": "Étape marquée comme terminée",
       "upload_hint": "Déposez un document ici ou cliquez pour parcourir",
       "upload_select": "Parcourir",
       "upload_submit": "Téléverser",
@@ -612,7 +604,7 @@
       "search_placeholder": "Rechercher une section",
       "columns": {
         "name": "Nom",
-        "program_year": "Année",
+        "description": "Description",
         "status": "Statut",
         "actions": "Actions"
       }
@@ -720,18 +712,8 @@
       "year": "Année",
       "year_placeholder": "2026",
       "is_active": "Programme actif",
-      "media_file": "Fichier",
+      "document": "Document",
       "current_file": "Fichier actuel"
-    },
-    "upload": {
-      "hint": "Déposez un fichier ici",
-      "select": "Parcourir",
-      "submit": "Téléverser",
-      "uploading": "Téléversement...",
-      "max_size": "Taille maximum",
-      "too_large": "Fichier trop volumineux",
-      "bad_type": "Type de fichier non supporté",
-      "success": "Fichier téléversé avec succès"
     },
     "status": {
       "active": "Actif",

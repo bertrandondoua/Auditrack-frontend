@@ -10,7 +10,11 @@ export interface Program {
   uuid?: string;
   program_year: number;
   is_active?: boolean;
-  media_file?: string | null;
+  /**
+   * Read-only document URL the backend attaches to a program. There is no
+   * writable upload field on this serializer — uploads are not supported.
+   */
+  document?: string | null;
   created_at?: string;
   updated_at?: string;
   created_by?: string | null;

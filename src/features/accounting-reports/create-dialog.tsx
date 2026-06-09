@@ -15,25 +15,22 @@ import type { Dict } from "@/lib/dictionaries";
 import { showErrorToasts, showSuccesToasts } from "@/lib/functions";
 import { useCreateAccountingReportMutation } from "@/redux/features/accountingReports/accountingReportsApiSlice";
 import { useGetOrganizationsQuery } from "@/redux/features/organizations/organizationApiSlice";
+import { useGetSectionsQuery } from "@/redux/features/sections/sectionsApiSlice";
 
 /**
- * NOTE: this form creates the report metadata only. The acknowledge_receipt
- * PDF attachment is a two-step dance — create report, upload Document with
- * an attachment FK, then PATCH the report. The backend Document contract
- * for non-control-step parents is not yet documented (see
- * BACKEND_MISMATCHES.md §4). Add the file step when that lands.
+ * Backend requires `organization` + `section` and uses `exercise_year` (int).
+ * The acknowledge_receipt PDF attachment is a separate Document upload not
+ * yet wired (see BACKEND_MISMATCHES.md). This form posts the report metadata.
  */
-
 const schema = z.object({
   organization: z.string().uuid(),
-  fiscal_year: z
+  section: z.string().uuid(),
+  exercise_year: z
     .union([z.string(), z.number()])
-    .transform((v) => String(v))
-    .refine((s) => /^\d{4}$/.test(s), { message: "Fiscal year must be a 4-digit year" })
-    .refine((s) => {
-      const n = Number(s);
-      return n >= fromYear && n <= toYear;
-    }, "Fiscal year out of range"),
+    .transform((v) => Number(v))
+    .refine((n) => Number.isInteger(n) && n >= fromYear && n <= toYear, {
+      message: `Exercise year must be between ${fromYear} and ${toYear}`,
+    }),
   deposited_at: z.string().min(1),
 });
 
@@ -43,13 +40,24 @@ export default function CreateAccountingReportDialog({ dict }: { dict: Dict }) {
   const { toast } = useToast();
   const [createReport, { isLoading }] = useCreateAccountingReportMutation();
   const { data: orgsData } = useGetOrganizationsQuery({ page: 1 });
+  const { data: sectionsData } = useGetSectionsQuery({ page: 1 });
   const f = dict.accounting_reports.fields;
 
   const orgOptions = (orgsData?.results ?? [])
     .filter((o) => o.uuid)
     .map((o) => ({ value: o.uuid!, label: o.name }));
+  const sectionOptions = (sectionsData?.results ?? [])
+    .filter((s) => s.uuid)
+    .map((s) => ({ value: s.uuid!, label: s.name }));
 
   const today = new Date().toISOString().split("T")[0];
+
+  const blankValues: FormValues = {
+    organization: "",
+    section: "",
+    exercise_year: new Date().getFullYear(),
+    deposited_at: today,
+  };
 
   const {
     register,
@@ -59,11 +67,7 @@ export default function CreateAccountingReportDialog({ dict }: { dict: Dict }) {
     formState: { errors },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
-    defaultValues: {
-      organization: "",
-      fiscal_year: String(new Date().getFullYear()),
-      deposited_at: today,
-    },
+    defaultValues: blankValues,
   });
 
   const submit = (closeDialog: () => void) =>
@@ -71,15 +75,12 @@ export default function CreateAccountingReportDialog({ dict }: { dict: Dict }) {
       try {
         const res = await createReport({
           organization: values.organization,
-          fiscal_year: values.fiscal_year,
+          section: values.section,
+          exercise_year: values.exercise_year,
           deposited_at: new Date(values.deposited_at).toISOString(),
         }).unwrap();
         showSuccesToasts(toast, res, dict.lang, dict.accounting_reports.create.success, dict);
-        reset({
-          organization: "",
-          fiscal_year: String(new Date().getFullYear()),
-          deposited_at: today,
-        });
+        reset(blankValues);
         closeDialog();
       } catch (err) {
         showErrorToasts(err, toast, dict.lang);
@@ -106,25 +107,41 @@ export default function CreateAccountingReportDialog({ dict }: { dict: Dict }) {
       )}
     >
       <form className="flex flex-col gap-4">
-        <Controller
-          control={control}
-          name="organization"
-          render={({ field }) => (
-            <CustomSelect
-              label={f.organization}
-              placeholder={f.organization_placeholder}
-              value={field.value}
-              onChange={field.onChange}
-              options={orgOptions}
-            />
-          )}
-        />
+        <div className="grid grid-cols-2 gap-4">
+          <Controller
+            control={control}
+            name="organization"
+            render={({ field }) => (
+              <CustomSelect
+                label={f.organization}
+                placeholder={f.organization_placeholder}
+                value={field.value}
+                onChange={field.onChange}
+                options={orgOptions}
+              />
+            )}
+          />
+          <Controller
+            control={control}
+            name="section"
+            render={({ field }) => (
+              <CustomSelect
+                label={f.section}
+                placeholder={f.section_placeholder}
+                value={field.value}
+                onChange={field.onChange}
+                options={sectionOptions}
+              />
+            )}
+          />
+        </div>
         <div className="grid grid-cols-2 gap-4">
           <FormField
-            label={f.fiscal_year}
-            placeholder={f.fiscal_year_placeholder}
-            error={errors.fiscal_year?.message}
-            inputProps={register("fiscal_year")}
+            label={f.exercise_year}
+            type="number"
+            placeholder={f.exercise_year_placeholder}
+            error={errors.exercise_year?.message}
+            inputProps={register("exercise_year")}
           />
           <FormField
             label={f.deposited_at}

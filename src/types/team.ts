@@ -11,8 +11,8 @@ export interface Team {
   team_lead_email: string;
   team_lead_phone_number: string;
   number_of_members?: number | null;
-  /** Section UUID. */
-  section?: string;
+  /** Section UUID. Required on write (openapi.json). */
+  section: string;
   created_at?: string;
   updated_at?: string;
   created_by?: string | null;

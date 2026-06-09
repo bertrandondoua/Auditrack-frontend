@@ -8,7 +8,6 @@ interface ListSectionsArgs {
   ordering?: string;
   page?: number;
   program?: string;
-  program_year?: string;
 }
 
 const sectionsApiSlice = api.injectEndpoints({

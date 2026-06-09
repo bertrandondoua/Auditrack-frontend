@@ -1,8 +1,9 @@
 "use client";
 
-import { CheckCircle2, Circle } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 
 import FileDropzone from "@/components/shared/FileDropzone";
+import { Button } from "@/components/ui/button";
 import type { Dict } from "@/lib/dictionaries";
 import { useGetDocumentsQuery } from "@/redux/features/documents/documentsApiSlice";
 
@@ -17,10 +18,14 @@ export interface ControlStepCardProps {
   csUuid?: string;
   stepName: string | null;
   recordedAt?: string;
-  completedAt?: string | null;
   controlOpened: boolean;
   dict: Dict;
-  onToggle: (csUuid: string, completed: boolean) => Promise<void>;
+  /**
+   * Fires the backend `complete_step/` action. The ControlStep serializer
+   * exposes no completion field, so completion state is not reflected back
+   * in the UI — the action is one-way (see BACKEND_MISMATCHES.md).
+   */
+  onComplete: (csUuid: string) => Promise<void>;
   onUpload: (csUuid: string, files: File[]) => Promise<void>;
 }
 
@@ -40,13 +45,11 @@ export function ControlStepCard({
   csUuid,
   stepName,
   recordedAt,
-  completedAt,
   controlOpened,
   dict,
-  onToggle,
+  onComplete,
   onUpload,
 }: ControlStepCardProps) {
-  const completed = !!completedAt;
   const { data: documentsData } = useGetDocumentsQuery(
     { control_step: csUuid, page: 1 },
     { skip: !csUuid },
@@ -56,17 +59,6 @@ export function ControlStepCard({
   return (
     <li className="rounded-md border border-[#E7F0ED] bg-white p-4 space-y-3">
       <div className="flex items-start gap-4">
-        <button
-          type="button"
-          onClick={() => csUuid && onToggle(csUuid, completed)}
-          disabled={!controlOpened}
-          className="mt-0.5 text-primary disabled:opacity-40"
-          aria-label={
-            completed ? dict.controls.detail.reopen_step : dict.controls.detail.complete_step
-          }
-        >
-          {completed ? <CheckCircle2 className="h-5 w-5" /> : <Circle className="h-5 w-5" />}
-        </button>
         <div className="flex-1">
           <div className="flex items-baseline justify-between gap-3">
             <div className="font-medium text-gray-800">
@@ -75,12 +67,17 @@ export function ControlStepCard({
             </div>
             <div className="text-xs text-gray-500">{formatDateTime(recordedAt)}</div>
           </div>
-          {completed && (
-            <div className="text-xs text-[#0CCE6B] mt-1">
-              {dict.controls.detail.completed_at}: {formatDateTime(completedAt)}
-            </div>
-          )}
         </div>
+        {controlOpened && csUuid && (
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => onComplete(csUuid)}
+            aria-label={dict.controls.detail.complete_step}
+          >
+            <CheckCircle2 className="h-4 w-4" /> {dict.controls.detail.complete_step}
+          </Button>
+        )}
       </div>
 
       {documents.length > 0 && (

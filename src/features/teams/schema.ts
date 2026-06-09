@@ -12,7 +12,8 @@ export const teamSchema = z.object({
     .transform((v) => (v === "" ? null : Number(v)))
     .nullable()
     .optional(),
-  section: z.string().uuid().optional().or(z.literal("")),
+  // Backend marks `section` as required on Team (openapi.json).
+  section: z.string().uuid({ message: "Section is required" }),
 });
 
 export type TeamFormValues = z.infer<typeof teamSchema>;

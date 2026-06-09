@@ -8,13 +8,20 @@
 export interface AccountingReport {
   uuid?: string;
   is_active?: boolean;
-  deposited_at: string;
+  deposited_at?: string;
   deposited_by?: string;
-  fiscal_year?: string;
-  /** Organization UUID. */
+  /** Backend field is `exercise_year` (integer), NOT `fiscal_year`. */
+  exercise_year?: number;
+  /** Organization UUID. Required on write. */
   organization: string;
+  /** Section UUID. Required on write. */
+  section: string;
   /** UUID of the document attached as acknowledgement (nullable). */
   acknowledge_receipt?: string | null;
+  /** Read-only display string the backend embeds for the linked org. */
+  organization_details?: string;
+  /** Read-only display string the backend embeds for the linked section. */
+  section_details?: string;
   created_at?: string;
   updated_at?: string;
   created_by?: string | null;
