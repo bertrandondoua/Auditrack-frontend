@@ -72,6 +72,19 @@ const usersApiSlice = api.injectEndpoints({
         { type: "User", id: "LIST" },
       ],
     }),
+
+    /**
+     * IT-manager action: reset another user's password.
+     * POST /accounts/users/{uuid}/admin_reset_password/ — omit `password` to
+     * have the backend generate a temporary one and email it to the user.
+     */
+    adminResetPassword: builder.mutation<{ detail?: string }, { uuid: string; password?: string }>({
+      query: ({ uuid, password }) => ({
+        url: `/accounts/users/${uuid}/admin_reset_password/`,
+        method: "POST",
+        body: password ? { password } : {},
+      }),
+    }),
   }),
 });
 
@@ -84,4 +97,5 @@ export const {
   useUpdateUserMutation,
   usePartialUpdateUserMutation,
   useDeleteUserMutation,
+  useAdminResetPasswordMutation,
 } = usersApiSlice;
